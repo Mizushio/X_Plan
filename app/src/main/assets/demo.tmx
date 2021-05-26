@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="14" height="6" tilewidth="46" tileheight="53" infinite="0" nextlayerid="3" nextobjectid="7">
+ <tileset firstgid="1" source="map.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="14" height="6">
+  <data encoding="csv">
+42,42,42,42,42,42,42,42,42,42,42,42,42,42,
+42,42,42,42,42,70,70,70,70,70,70,59,42,42,
+42,42,42,42,59,70,42,42,42,42,70,42,42,42,
+70,70,70,70,70,88,42,42,42,42,70,70,70,70,
+42,42,42,42,42,42,42,42,42,42,42,42,42,59,
+42,42,42,42,42,42,42,42,42,42,42,42,42,42
+</data>
+ </layer>
+ <objectgroup id="2" name="road">
+  <object id="1" x="69.3642" y="183.32"/>
+  <object id="2" x="260.941" y="176.713"/>
+  <object id="3" x="260.941" y="80.9249"/>
+  <object id="4" x="478.943" y="79.2733"/>
+  <object id="5" x="477.291" y="186.623"/>
+  <object id="6" x="616.02" y="188.274"/>
+ </objectgroup>
+</map>
