@@ -4,11 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCLabel;
-import org.cocos2d.nodes.CCNode;
 import org.cocos2d.opengl.CCGLSurfaceView;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
         //CCLayer layer = CCLayer.node();//创建一个图层对象
         //FirstLayer layer = new FirstLayer();
-        ActionLayer layer1 = new ActionLayer();
+        ActionLayer layer = new ActionLayer();
+        //Mapdemo layer = new Mapdemo();
 
-        //scene.addChild(layer);
-        scene.addChild(layer1);
+        scene.addChild(layer);
         director.runWithScene(scene);
     }
 
