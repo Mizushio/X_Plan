@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--这里代码的是创建一个标题栏，左边是返回键-->
+<!--我们设置RelativeLayout布局，id = "title_bar"-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title_bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:typeface="serif">
+    <!--一个是显示返回键，一个是显示标题框-->
+    <!--通过TextView来显示，id ： tv_back , tv_main_title -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:text="登录"
+        android:textSize="150px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:id="@+id/msg"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:layout_width="538dp"
+        android:layout_height="232dp"
+        android:gravity="center"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户名"
+                android:textSize="23dp"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:layout_marginLeft="20px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密    码"
+                android:textSize="23dp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="25dp"
+                android:layout_marginLeft="20px"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+            <Button
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:text="登录"
+                android:textSize="30dp" />
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="#00000000"
+                android:text="注册"
+                android:textSize="30dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
