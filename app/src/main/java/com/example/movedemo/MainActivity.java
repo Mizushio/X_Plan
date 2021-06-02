@@ -3,6 +3,9 @@ package com.example.movedemo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+
+import com.example.movedemo.HttpUtil.HttpUtils;
 
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
@@ -16,6 +19,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         CCGLSurfaceView view = new CCGLSurfaceView(this);//创建一个surfaceView
         setContentView(view);
+
+        /**
+         * http请求要开放权限。AndroidManifest
+         * 要在子线程中使用
+         * 尽量加try+catch
+         */
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+
+                String pamm="{\"username\":\"123\",\"password\":\"123\"}";
+                String result=(HttpUtils.sendPost("http://mizushio.top:8080/AppLogin",pamm));
+                Log.e("post:",result);
+            }
+        }).start();
+
+
 
         director = CCDirector.sharedDirector();//获取导演单例
         director.attachInView(view);//开启绘制线程
