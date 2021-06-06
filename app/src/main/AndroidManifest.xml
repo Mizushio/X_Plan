@@ -24,6 +24,21 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".RankActivity"  android:screenOrientation="landscape">
+            android:screenOrientation="landscape">
+            <intent-filter>
+
+                <action android:name="android.intent.action.ALL_APPS" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".HelpActivity"  android:screenOrientation="landscape">
+            android:screenOrientation="landscape">
+            <intent-filter>
+
+                <action android:name="android.intent.action.ALL_APPS" />
+            </intent-filter>
+        </activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
