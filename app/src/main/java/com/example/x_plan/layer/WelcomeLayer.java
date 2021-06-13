@@ -61,17 +61,17 @@ public class WelcomeLayer extends CCLayer {
         this.addChild(start);
 
         //排行榜
-        list=CCSprite.sprite("index/paihangbang.png");
+        list=CCSprite.sprite("index/list.png");
         list.setPosition((winSize.width-50),winSize.height-30);
-        list.setScale(0.3f);
-        list.setScaleY(0.1f);
+        list.setScale(0.04f);
+        list.setScaleX(0.02f);
         this.addChild(list);
 
         //帮助按钮
         help=CCSprite.sprite("index/help.png");
-        help.setPosition((winSize.width/2),list.getPosition().y-80);
-        help.setScale(0.15f);
-        help.setScaleY(0.1f);
+        help.setPosition((winSize.width-120),winSize.height-30);
+        help.setScale(0.04f);
+        help.setScaleX(0.02f);
         this.addChild(help);
 
 

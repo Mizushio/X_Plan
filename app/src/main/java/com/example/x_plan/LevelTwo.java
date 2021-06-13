@@ -1,142 +1,93 @@
 package com.example.x_plan;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.sql.Array;
+import androidx.appcompat.app.AppCompatActivity;
 
-//import org.cocos2d.layers.CCScene;
-//import org.cocos2d.nodes.CCDirector;
-//import org.cocos2d.opengl.CCGLSurfaceView;
 
-public class LevelOne extends AppCompatActivity {
-    private Spinner ins = null;
-    public String str = "";
+import java.util.logging.LogRecord;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.level1);
+public class LevelTwo extends AppCompatActivity {
 
-        ins = findViewById(R.id.instruction);
-        ins.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String content = parent.getItemAtPosition(position).toString();
-                switch(parent.getId()){
-                    case R.id.instruction:
-                        Toast.makeText(LevelOne.this,"选择的模式:" + content, Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
+//    private final static String TAG = "UOfly Android Thread ==>";
+    private int count = 0;
+    private String str;
+    private boolean role1_run = false;
+    private boolean role2_run = false;
+    private boolean is_run = false;
+    private Handler mHandler = new Handler();
+    private Handler mHandler_ = new Handler();
+
+
+    private Runnable mRunnable = new Runnable() {
+
+        @SuppressLint("LongLogTag")
+        public void run() {
+            final ImageButton imageButton = findViewById(R.id.role1);
+//            Button run = findViewById(R.id.run);
+            Button a = findViewById(R.id.A);
+            Button b = findViewById(R.id.B);
+            final View[] views = new View[]{a, b};
+            final long[] time = new long[]{5000,1000};
+            Func f = new Func();
+            if(is_run == true && role1_run == false){
+                f.Move(imageButton, views, time);
+                role1_run = true;
+            }
+            Button enemy = findViewById(R.id.enemy);
+            imageButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    initPopWindow(v);
                 }
-            }
+            });
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
 
-        final Func f = new Func();
-        final AnimatorSet[] animatorSet = new AnimatorSet[2];
-        final ImageView imageButton = findViewById(R.id.catBtn);
-//        ImageView[] imageViews = new ImageView[1];
-//        imageViews[0] = imageView1;
-        boolean[] signal = new boolean[9];
-        for(int i = 0; i < 9; i++){
-            signal[i] = false;
+            // 每0.3秒执行一次
+            mHandler.postDelayed(mRunnable, 300);
         }
-        Button run = findViewById(R.id.run);
-        final Button a = findViewById(R.id.A);
-        final Button b = findViewById(R.id.B);
-        final ImageView c = findViewById(R.id.C);
-        final View[] views = new View[]{c, a , b};
-        final long[] time = new long[]{5000,1000,5000};
-        run.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animatorSet[0] = f.Move(imageButton, views, time);
-            }
-        });
-        a.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LevelOne.this, "A", Toast.LENGTH_SHORT).show();
-                View[] views1 = new View[]{c, b};
-                long[] time1 = new long[]{3000, 3000};
-                animatorSet[1] = f.Move(imageButton, views1, time1);
-            }
-        });
-        b.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onClick(View v) {
-                animatorSet[0].resume();
-            }
-        });
-        c.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(f.victory(imageButton, c)){
-                    Toast.makeText(LevelOne.this,"胜利", Toast.LENGTH_SHORT).show();
-                };
-                int[] im = new int[2];
-                int[] end = new int[2];
-                int[] bpos = new int[2];
-                int[] apos = new int[2];
-                imageButton.getLocationOnScreen(im);
-                c.getLocationOnScreen(end);
-                a.getLocationOnScreen(apos);
-                b.getLocationOnScreen(bpos);
-//                ObjectAnimator animator = ObjectAnimator.ofFloat(imageButton, "translationX", a.getLeft() - im[0]);
-//                animator.setDuration(3000);
-//                ObjectAnimator animator1 = ObjectAnimator.ofFloat(imageButton, "translationX", 0);
-//                animator1.setDuration(3000);
-//                AnimatorSet animatorSet1 = new AnimatorSet();
-//                animatorSet1.play(animator).before(animator1);
-//                animatorSet1.start();
+    };
 
-                Toast.makeText(LevelOne.this,"role:" + im[0] + " " +
-                        im[1] + "\nc:" + end[0] + " " + end[1]
-                        + "\na:" + apos[0] + " " + apos[1]
-                        + "\nb:" + bpos[0] + " " + bpos[1], Toast.LENGTH_SHORT).show();
-//                Toast.makeText(LevelOne.this,"role:" + im[0] + " " + im[1]
-//                        + "\nc:" + c.getLeft() + " " + c.getBottom()
-//                        + "\na:" + a.getLeft() + " " + a.getBottom()
-//                        + "\nb:" + b.getLeft() + " " + b.getBottom(), Toast.LENGTH_SHORT).show();
+    private Runnable mRunnable_ = new Runnable() {
+
+        @SuppressLint("LongLogTag")
+        public void run() {
+            final ImageButton imageButton = findViewById(R.id.role2);
+//            Button run = findViewById(R.id.run2);
+            Button a = findViewById(R.id.A);
+            Button b = findViewById(R.id.B);
+            final View[] views = new View[]{a, b};
+            final long[] time = new long[]{5000,1000};
+            if(is_run == true && role2_run == false){
+                try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Func f = new Func();
+                        f.Move(imageButton, views, time);
+                        role2_run = true;
+
             }
-        });
-        imageButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                initPopWindow(v);
-            }
-        });
-    }
+
+            // 每0.3秒执行一次
+            mHandler.postDelayed(mRunnable_, 300);
+        }
+    };
     private void initPopWindow(View v){
-        View view = LayoutInflater.from(LevelOne.this).inflate(R.layout.pop1, null, false);
+        View view = LayoutInflater.from(LevelTwo.this).inflate(R.layout.pop1, null, false);
         //通过view获取pop界面的组件
         Button back = view.findViewById(R.id.back);
         Button one = view.findViewById(R.id.ins_one);
@@ -173,7 +124,7 @@ public class LevelOne extends AppCompatActivity {
         });
     }
     private void initPopWindow2(View v){
-        View view = LayoutInflater.from(LevelOne.this).inflate(R.layout.pop2, null, false);
+        View view = LayoutInflater.from(LevelTwo.this).inflate(R.layout.pop2, null, false);
         //通过view获取pop界面的组件
         Button back = view.findViewById(R.id.back);
         Button move = view.findViewById(R.id.move);
@@ -214,7 +165,7 @@ public class LevelOne extends AppCompatActivity {
         });
     }
     private void initPopWindow3(View v){
-        View view = LayoutInflater.from(LevelOne.this).inflate(R.layout.pop3, null, false);
+        View view = LayoutInflater.from(LevelTwo.this).inflate(R.layout.pop3, null, false);
         //通过view获取pop界面的组件
         Button back = view.findViewById(R.id.back);
         Button A = view.findViewById(R.id.A1);
@@ -281,5 +232,40 @@ public class LevelOne extends AppCompatActivity {
                 initPopWindow2(v);
             }
         });
+    }
+
+
+
+    /**
+     * Called when the activity is first created.
+     */
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.level2);
+
+
+        // 通过Handler启动线程
+        mHandler.post(mRunnable);  //发送消息，启动线程运行
+        mHandler_.post(mRunnable_);
+
+        Button run = findViewById(R.id.run);
+        run.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                is_run = true;
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        //将线程销毁掉
+        mHandler.removeCallbacks(mRunnable);
+        mHandler_.removeCallbacks(mRunnable_);
+        super.onDestroy();
     }
 }

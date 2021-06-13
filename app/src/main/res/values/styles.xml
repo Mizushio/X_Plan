@@ -8,6 +8,9 @@
         <!-- Customize your theme here. -->
         <!--设置背景透明-->
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="MyEditText" parent="Theme.AppCompat.Light">

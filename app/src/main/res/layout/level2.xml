@@ -2,31 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Spinner
-        android:id="@+id/instruction"
-        android:layout_width="152dp"
-        android:layout_height="38dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="358dp"
-        android:layout_marginRight="358dp"
-        android:layout_marginBottom="326dp"
-        android:entries="@array/moveType" />
+    android:layout_height="match_parent"
+    android:background="@drawable/map_level2">
 
     <Button
         android:id="@+id/A"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="106dp"
-        android:layout_marginBottom="79dp"
-        android:text="A"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="106dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="374dp"
+        android:layout_marginRight="374dp"
+        android:layout_marginBottom="158dp"
+        android:text="A" />
 
     <Button
         android:id="@+id/B"
@@ -42,19 +31,29 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="179dp" />
 
-    <ImageView
-        android:id="@+id/C"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
+    <ImageButton
+        android:id="@+id/role1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="575dp"
-        android:layout_marginRight="575dp"
-        android:layout_marginBottom="229dp"
-        android:src="@drawable/cat"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="61dp" />
+        android:layout_marginEnd="660dp"
+        android:layout_marginRight="660dp"
+        android:layout_marginBottom="178dp"
+        android:src="@drawable/player" />
+
+    <ImageButton
+        android:id="@+id/role2"
+        android:layout_width="43dp"
+        android:layout_height="47dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="685dp"
+        android:layout_marginRight="685dp"
+        android:layout_marginBottom="156dp"
+        android:src="@drawable/player" />
 
     <Button
         android:id="@+id/run"
@@ -68,19 +67,20 @@
         android:layout_marginBottom="318dp"
         android:text="启动"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="61dp" />
+        tools:layout_editor_absoluteY="61dp"
+        tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/catBtn"
-        android:layout_width="191dp"
+    <Button
+        android:id="@+id/enemy"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="523dp"
-        android:layout_marginRight="523dp"
-        android:layout_marginBottom="39dp"
-        android:src="@drawable/player" />
+        android:layout_marginEnd="578dp"
+        android:layout_marginRight="578dp"
+        android:layout_marginBottom="226dp"
+        android:text="敌人" />
 
 
 </RelativeLayout>
