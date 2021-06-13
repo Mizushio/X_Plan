@@ -1,7 +1,11 @@
 package com.example.x_plan.layer;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.example.x_plan.LevelOne;
+import com.example.x_plan.RankActivity;
 import com.example.x_plan.utils.CommonUtils;
 import com.example.x_plan.utils.HttpUtils;
 
@@ -21,10 +25,12 @@ public class MenuLayer extends CCLayer {
     protected CGSize winSize= CCDirector.sharedDirector().winSize();
 
     private int level;
+    private Context context;
 
     public MenuLayer(){}
 
-    public MenuLayer(final String username){
+    public MenuLayer(final String username, final Context context){
+        this.context = context;
         System.out.println("menu发出的"+username);
         new Thread(new Runnable() {
             @Override
@@ -98,8 +104,9 @@ public class MenuLayer extends CCLayer {
     }
 
     public void onClick1(Object obj){
-        Log.d("Test","item click...");
-        CommonUtils.changeLayer(new FightLayer());
+        Intent intent = new Intent(context, LevelOne.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
 

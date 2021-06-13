@@ -23,6 +23,11 @@
                 <action android:name="android.intent.action.ALL_APPS" />
             </intent-filter>
         </activity>
+        <activity android:name=".LevelOne" android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.ALL_APPS" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".RankActivity"  android:screenOrientation="landscape">
             <intent-filter>
