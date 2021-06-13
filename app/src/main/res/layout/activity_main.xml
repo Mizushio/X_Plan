@@ -4,18 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/catBtn"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="591dp"
-        android:layout_marginBottom="7dp"
-        android:src="@drawable/player"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="591dp" />
-
     <Spinner
         android:id="@+id/instruction"
         android:layout_width="152dp"
@@ -54,19 +42,19 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="179dp" />
 
-    <Button
+    <ImageView
         android:id="@+id/C"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="567dp"
-        android:layout_marginBottom="270dp"
-        android:text="C"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="61dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="567dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="575dp"
+        android:layout_marginRight="575dp"
+        android:layout_marginBottom="229dp"
+        android:src="@drawable/cat"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="61dp" />
 
     <Button
         android:id="@+id/run"
@@ -81,6 +69,18 @@
         android:text="启动"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="61dp" />
+
+    <ImageView
+        android:id="@+id/catBtn"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="523dp"
+        android:layout_marginRight="523dp"
+        android:layout_marginBottom="39dp"
+        android:src="@drawable/player" />
 
 
 </RelativeLayout>

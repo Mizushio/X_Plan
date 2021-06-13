@@ -1,11 +1,13 @@
 package com.example.x_plan;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -56,8 +58,9 @@ public class LevelOne extends AppCompatActivity {
             }
         });
 
-        Func f = new Func();
-        final ImageButton imageButton = findViewById(R.id.catBtn);
+        final Func f = new Func();
+        final AnimatorSet[] animatorSet = new AnimatorSet[2];
+        final ImageView imageButton = findViewById(R.id.catBtn);
 //        ImageView[] imageViews = new ImageView[1];
 //        imageViews[0] = imageView1;
         boolean[] signal = new boolean[9];
@@ -65,16 +68,64 @@ public class LevelOne extends AppCompatActivity {
             signal[i] = false;
         }
         Button run = findViewById(R.id.run);
-        Button a = findViewById(R.id.A);
-        Button b = findViewById(R.id.B);
-        Button c = findViewById(R.id.C);
-        final View[] views = new View[]{a, b, c};
+        final Button a = findViewById(R.id.A);
+        final Button b = findViewById(R.id.B);
+        final ImageView c = findViewById(R.id.C);
+        final View[] views = new View[]{c, a , b};
         final long[] time = new long[]{5000,1000,5000};
         run.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Func f = new Func();
-                f.Move(imageButton, views, time);
+                animatorSet[0] = f.Move(imageButton, views, time);
+            }
+        });
+        a.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LevelOne.this, "A", Toast.LENGTH_SHORT).show();
+                View[] views1 = new View[]{c, b};
+                long[] time1 = new long[]{3000, 3000};
+                animatorSet[1] = f.Move(imageButton, views1, time1);
+            }
+        });
+        b.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                animatorSet[0].resume();
+            }
+        });
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(f.victory(imageButton, c)){
+                    Toast.makeText(LevelOne.this,"胜利", Toast.LENGTH_SHORT).show();
+                };
+                int[] im = new int[2];
+                int[] end = new int[2];
+                int[] bpos = new int[2];
+                int[] apos = new int[2];
+                imageButton.getLocationOnScreen(im);
+                c.getLocationOnScreen(end);
+                a.getLocationOnScreen(apos);
+                b.getLocationOnScreen(bpos);
+//                ObjectAnimator animator = ObjectAnimator.ofFloat(imageButton, "translationX", a.getLeft() - im[0]);
+//                animator.setDuration(3000);
+//                ObjectAnimator animator1 = ObjectAnimator.ofFloat(imageButton, "translationX", 0);
+//                animator1.setDuration(3000);
+//                AnimatorSet animatorSet1 = new AnimatorSet();
+//                animatorSet1.play(animator).before(animator1);
+//                animatorSet1.start();
+
+                Toast.makeText(LevelOne.this,"role:" + im[0] + " " +
+                        im[1] + "\nc:" + end[0] + " " + end[1]
+                        + "\na:" + apos[0] + " " + apos[1]
+                        + "\nb:" + bpos[0] + " " + bpos[1], Toast.LENGTH_SHORT).show();
+//                Toast.makeText(LevelOne.this,"role:" + im[0] + " " + im[1]
+//                        + "\nc:" + c.getLeft() + " " + c.getBottom()
+//                        + "\na:" + a.getLeft() + " " + a.getBottom()
+//                        + "\nb:" + b.getLeft() + " " + b.getBottom(), Toast.LENGTH_SHORT).show();
             }
         });
         imageButton.setOnClickListener(new View.OnClickListener(){
