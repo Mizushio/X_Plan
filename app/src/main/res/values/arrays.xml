@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="moveType">
+        <item>发现敌人</item>
+        <item>与路径点的距离</item>
+        <item>检查信号量</item>
+    </string-array>
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/catBtn"
+        android:layout_width="131dp"
+        android:layout_height="136dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="591dp"
+        android:layout_marginBottom="7dp"
+        android:src="@drawable/player"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="591dp" />
+
+    <Spinner
+        android:id="@+id/instruction"
+        android:layout_width="152dp"
+        android:layout_height="38dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="359dp"
+        android:layout_marginBottom="350dp"
+        android:entries="@array/moveType"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="359dp" />
+
+    <Button
+        android:id="@+id/A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="106dp"
+        android:layout_marginBottom="79dp"
+        android:text="A"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="106dp" />
+
+    <Button
+        android:id="@+id/B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="179dp"
+        android:layout_marginBottom="243dp"
+        android:text="B"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="61dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="179dp" />
+
+    <Button
+        android:id="@+id/C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="567dp"
+        android:layout_marginBottom="270dp"
+        android:text="C"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="61dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="567dp" />
+
+    <Button
+        android:id="@+id/run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="631dp"
+        android:layout_marginBottom="349dp"
+        android:text="启动"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="61dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="631dp" />
+
+
+</RelativeLayout>

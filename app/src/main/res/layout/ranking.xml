@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--这里代码的是创建一个标题栏，左边是返回键-->
+<!--我们设置RelativeLayout布局，id = "title_bar"-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/title_bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:typeface="serif">
+    <!--一个是显示返回键，一个是显示标题框-->
+    <!--通过TextView来显示，id ： tv_back , tv_main_title -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:text="排行榜"
+        android:textSize="150px" />
+
+    <LinearLayout
+        android:layout_width="538dp"
+        android:layout_height="303dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/rankText"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:textColor="#ECCE76"
+            android:textColorHighlight="#E3AB58"
+            android:textColorHint="#CAC06D"
+            android:textColorLink="#CFD878"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</LinearLayout>
