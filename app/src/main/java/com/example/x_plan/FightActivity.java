@@ -1,5 +1,4 @@
 package com.example.x_plan;
-
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -47,7 +47,8 @@ public class FightActivity extends AppCompatActivity {
         });
 
         Func f = new Func();
-        final ImageButton imageButton = findViewById(R.id.catBtn);
+        final ImageView imageView = findViewById(R.id.catBtn);
+
         boolean[] signal = new boolean[9];
         for(int i = 0; i < 9; i++){
             signal[i] = false;
@@ -62,10 +63,10 @@ public class FightActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Func f = new Func();
-                f.Move(imageButton, views, time);
+                f.Move(imageView, views, time);
             }
         });
-        imageButton.setOnClickListener(new View.OnClickListener(){
+        imageView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 initPopWindow(v);
