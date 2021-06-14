@@ -57,12 +57,10 @@ public class LevelThree extends AppCompatActivity{
                 player1.player.setEnabled(false);
                 player2.player.setEnabled(false);
                 cal();//解析命令数组
-                animatorSet[0] = f.Move_(player1.player,player1.views,250);
-                animatorSet[1] = f.Move_(player2.player, player2.views, 200);
+                animatorSet[0] = f.Move_(player1.player,player1.views,200);
+                animatorSet[1] = f.Move_(player2.player, player2.views, 250);
                 handler2.post(player2Runnable);
                 handler1.post(player1Runnable);
-
-
             }
         });
         instroduction.setOnClickListener(new View.OnClickListener() {
@@ -166,11 +164,8 @@ public class LevelThree extends AppCompatActivity{
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void run() {
-            //没有设置信号量,同时前进
             if (f.FindEnemy_(player1.player, towers, 625)) {
-//                animatorSet[1] = f.Move_(player2.player,player2.views,150);
                 player1.setSignal(true, 0);
-//                handler2.post(player2Runnable);
             }
             if (f.FindEnemy_(player1.player, towers, 100) && count1 < draw1.length && !attackFlag) {
                 attackFlag = true;
@@ -180,12 +175,9 @@ public class LevelThree extends AppCompatActivity{
                 attackFlag = false;
             }
             if (count1 == draw1.length) {
-                animatorSet[0].pause();
+                animatorSet[0].end();
                 player1.ifDied = true;
             }
-//            if(f.victory(player1.player,end)){//到达终点，胜利
-//                animatorSet[0].pause();
-//            }
             handler1.postDelayed(player1Runnable, 200);
         }
     };
@@ -196,9 +188,9 @@ public class LevelThree extends AppCompatActivity{
         @Override
         public void run() {
             if(f.victory(player2.player,end)){//到达终点，胜利
-                animatorSet[1].pause();
+                animatorSet[1].end();
                 ifWin=true;
-                initResultPopWindow(getWindow().getDecorView());
+                // TODO: 2021/6/14 此处跳转胜利activity
             }
             if (f.FindEnemy_(player2.player, towers, 100) && count2 < draw2.length && !attackFlag) {
                 attackFlag = true;
@@ -213,7 +205,7 @@ public class LevelThree extends AppCompatActivity{
             }
             if ((!player2.getIfSignal() || !player2.getIfSignal())&&!player2.ifDied&&!ifWin) {
                 animatorSet[1].start();
-            } else if (player1.getSignal(0) && player2.getIfSignal()&&!player2.ifDied) {
+            } else if (player1.getSignal(0) && player2.getIfSignal()&&!player2.ifDied&&!ifWin) {
                 animatorSet[1].start();
             } else animatorSet[1].pause();
 
@@ -461,20 +453,5 @@ public class LevelThree extends AppCompatActivity{
                 initPopWindow2(v,ins,player);
             }
         });
-    }
-
-    private void initResultPopWindow(View v){
-        View view = LayoutInflater.from(LevelThree.this).inflate(R.layout.result, null, false);
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
-        popupWindow.setAnimationStyle(R.anim.anim_pop);
-        popupWindow.setTouchable(true);
-        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        popupWindow.showAsDropDown(v, 100 - v.getLeft(), -v.getBottom());
     }
 }

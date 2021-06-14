@@ -55,8 +55,8 @@
 
     <ImageView
         android:id="@+id/player1"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="300dp"
         android:src="@drawable/role1_hp6" />
     <TextView
@@ -68,15 +68,15 @@
 
     <ImageView
         android:id="@+id/player2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/role2_hp6" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="起点2"
         android:id="@+id/start2"/>
 
