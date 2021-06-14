@@ -20,6 +20,7 @@ import java.util.Map;
 
 public class LevelThree extends AppCompatActivity{
     private Button sumbit=null;//确定
+    private Button instroduction=null;//游戏说明
     private TextView start=null;//起点
     private TextView end=null;//终点
     private TextView position1=null;//地点1
@@ -48,9 +49,15 @@ public class LevelThree extends AppCompatActivity{
                 thread.start();
             }
         });
+        instroduction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initInstructionWindow(view);
+            }
+        });
     }
 
-    //解析指令
+    //解析指令s
     private void cal(){
         for (int i=0;i<3;i++) {
             try {
@@ -107,6 +114,7 @@ public class LevelThree extends AppCompatActivity{
     //初始化
     private void init(){
         sumbit=(Button)findViewById(R.id.submit);
+        instroduction=(Button)findViewById(R.id.introduction);
         block=(Button)findViewById(R.id.block);
         start=(TextView)findViewById(R.id.start);
         end=(TextView) findViewById(R.id.end);
@@ -345,6 +353,33 @@ public class LevelThree extends AppCompatActivity{
                 player.setInstructions(map,ins);
                 popupWindow.dismiss();
                 initPopWindow2(v,ins,player);
+            }
+        });
+    }
+
+    private void initInstructionWindow(View v){
+        View view = LayoutInflater.from(LevelThree.this).inflate(R.layout.fight3_introduction, null, false);
+        Button back = view.findViewById(R.id.close);
+        TextView instruction=view.findViewById(R.id.introduction_text);
+        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        popupWindow.setAnimationStyle(R.anim.anim_pop);
+        popupWindow.setTouchable(true);
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) { return false; }
+        });
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.showAsDropDown(v, 100 - v.getLeft(), -v.getBottom());
+        instruction.setText("\n点击玩家进入指令选择界面\n" +
+                "-> 信号量：两名玩家同时设置信息量后，玩家一先行出发，识别到塔楼后，发出信息量，玩家二接收到信号量后出发。如果有一方没有设置信息量，则两名玩家同时出发\n" +
+                "-> 设置信息量：点击信息量选择按钮即可设置信息量\n" +
+                "-> 自由选择路径：路径的起止分别为固定的起点和终点，玩家不可更改。玩家可以选择中间点的顺序，默认路径是起点->1->2->终点\n" +
+                "-> 选择路径：进入选择路径界面后，依次点击中间点即可,选择完成后点击保存\n" +
+                "-> 取消选择：进入指令详情后，点击清空按钮即可取消选择");
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
             }
         });
     }
