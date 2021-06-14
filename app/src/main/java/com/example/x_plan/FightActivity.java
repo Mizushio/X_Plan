@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,28 +27,9 @@ public class FightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ins = findViewById(R.id.instruction);
-        ins.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String content = parent.getItemAtPosition(position).toString();
-                switch(parent.getId()){
-                    case R.id.instruction:
-                        Toast.makeText(FightActivity.this,"选择的模式:" + content, Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         Func f = new Func();
-        final ImageButton imageButton = findViewById(R.id.catBtn);
+        final ImageView imageButton = findViewById(R.id.role1);
         boolean[] signal = new boolean[9];
         for(int i = 0; i < 9; i++){
             signal[i] = false;
@@ -73,12 +55,10 @@ public class FightActivity extends AppCompatActivity {
         });
     }
     private void initPopWindow(View v){
-        View view = LayoutInflater.from(FightActivity.this).inflate(R.layout.pop1, null, false);
+        View view = LayoutInflater.from(FightActivity.this).inflate(R.layout.level1_pop1, null, false);
         //通过view获取pop界面的组件
         Button back = view.findViewById(R.id.back);
         Button one = view.findViewById(R.id.ins_one);
-        Button two = view.findViewById(R.id.ins_two);
-        Button three = view.findViewById(R.id.ins_three);
         //构造一个popWindow,参数依次是View、宽、高
         final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
         //设置加载动画
@@ -110,13 +90,13 @@ public class FightActivity extends AppCompatActivity {
         });
     }
     private void initPopWindow2(View v){
-        View view = LayoutInflater.from(FightActivity.this).inflate(R.layout.pop2, null, false);
+        View view = LayoutInflater.from(FightActivity.this).inflate(R.layout.level1_pop2, null, false);
         //通过view获取pop界面的组件
         Button back = view.findViewById(R.id.back);
         Button move = view.findViewById(R.id.move);
-        TextView ins1 = view.findViewById(R.id.ins1);
+        TextView ins = view.findViewById(R.id.ins);
         if(str != ""){
-            ins1.setText(str + "\n");
+            ins.setText(str + "\n");
         }
         //构造一个popWindow,参数依次是View、宽、高
         final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
@@ -151,13 +131,13 @@ public class FightActivity extends AppCompatActivity {
         });
     }
     private void initPopWindow3(View v){
-        View view = LayoutInflater.from(FightActivity.this).inflate(R.layout.pop3, null, false);
+        View view = LayoutInflater.from(FightActivity.this).inflate(R.layout.level1_pop3, null, false);
         //通过view获取pop界面的组件
         Button back = view.findViewById(R.id.back);
-        Button A = view.findViewById(R.id.A1);
-        Button B = view.findViewById(R.id.B1);
-        Button C = view.findViewById(R.id.C1);
-        Button save = view.findViewById(R.id.save1);
+        Button A = view.findViewById(R.id.A);
+        Button B = view.findViewById(R.id.B);
+        Button C = view.findViewById(R.id.C);
+        Button save = view.findViewById(R.id.save);
         final TextView choose = view.findViewById(R.id.choose);
         //构造一个popWindow,参数依次是View、宽、高
         final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);

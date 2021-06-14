@@ -42,6 +42,9 @@ public class Func {
         //属性动画集合
         AnimatorSet animatorSet = new AnimatorSet();
         //每个动画执行的顺序,play表示本次移动，with表示一起移动，before表示在play后面移动
+        if(views.length == 1){
+            animatorSet.play(aniSetX[0]).with(aniSetY[0]);
+        }
         for(int i = 0; i < views.length - 1; i++){
             animatorSet.play(aniSetX[i]).with(aniSetY[i]).before(aniSetX[i + 1]).before(aniSetY[i + 1]);
         }
@@ -90,5 +93,12 @@ public class Func {
         }
         else
             return false;
+    }
+    //设置人物位置
+    public void setRolePos(ImageView role, int left, int top){
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) role.getLayoutParams();
+        layoutParams.leftMargin = left;
+        layoutParams.topMargin = top;
+        role.setLayoutParams(layoutParams);
     }
 }
