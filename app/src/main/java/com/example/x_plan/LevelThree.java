@@ -4,31 +4,21 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.x_plan.engine.Func;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.TimerTask;
 
-public class Fight3Activity extends AppCompatActivity{
+public class LevelThree extends AppCompatActivity{
     private Button sumbit=null;//确定
     private TextView start=null;//起点
     private TextView end=null;//终点
@@ -185,7 +175,7 @@ public class Fight3Activity extends AppCompatActivity{
     };
 
     private void initPopWindow(View v, final Player player){
-        View view= LayoutInflater.from(Fight3Activity.this).inflate(R.layout.fight3_pop1,null,false);
+        View view= LayoutInflater.from(LevelThree.this).inflate(R.layout.fight3_pop1,null,false);
         Button back = view.findViewById(R.id.back);
         //指令1,2,3
         Button one = view.findViewById(R.id.ins_one);
@@ -233,7 +223,7 @@ public class Fight3Activity extends AppCompatActivity{
     }
 
     private void initPopWindow2(View v, final int ins, final Player player){
-        View view = LayoutInflater.from(Fight3Activity.this).inflate(R.layout.fight3_pop2, null, false);
+        View view = LayoutInflater.from(LevelThree.this).inflate(R.layout.fight3_pop2, null, false);
         //通过view获取pop界面的组件
         Button clear = view.findViewById(R.id.clear);
         Button back=view.findViewById(R.id.back);
@@ -296,7 +286,7 @@ public class Fight3Activity extends AppCompatActivity{
     }
 
     private void initPopWindow3(View v, final int ins, final Player player){
-        View view = LayoutInflater.from(Fight3Activity.this).inflate(R.layout.fight3_pop3, null, false);
+        View view = LayoutInflater.from(LevelThree.this).inflate(R.layout.fight3_pop3, null, false);
         Button back = view.findViewById(R.id.back);
         Button A = view.findViewById(R.id.A1);
         Button B = view.findViewById(R.id.B1);
