@@ -34,7 +34,7 @@ public class LevelThree extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fight3);
+        setContentView(R.layout.level3);
         init();
         sumbit.setOnClickListener(new View.OnClickListener(){//启动游戏
             @Override
@@ -175,7 +175,7 @@ public class LevelThree extends AppCompatActivity{
     };
 
     private void initPopWindow(View v, final Player player){
-        View view= LayoutInflater.from(LevelThree.this).inflate(R.layout.fight3_pop1,null,false);
+        View view= LayoutInflater.from(LevelThree.this).inflate(R.layout.level3_pop1,null,false);
         Button back = view.findViewById(R.id.back);
         //指令1,2,3
         Button one = view.findViewById(R.id.ins_one);
@@ -223,7 +223,7 @@ public class LevelThree extends AppCompatActivity{
     }
 
     private void initPopWindow2(View v, final int ins, final Player player){
-        View view = LayoutInflater.from(LevelThree.this).inflate(R.layout.fight3_pop2, null, false);
+        View view = LayoutInflater.from(LevelThree.this).inflate(R.layout.level3_pop2, null, false);
         //通过view获取pop界面的组件
         Button clear = view.findViewById(R.id.clear);
         Button back=view.findViewById(R.id.back);
@@ -286,7 +286,7 @@ public class LevelThree extends AppCompatActivity{
     }
 
     private void initPopWindow3(View v, final int ins, final Player player){
-        View view = LayoutInflater.from(LevelThree.this).inflate(R.layout.fight3_pop3, null, false);
+        View view = LayoutInflater.from(LevelThree.this).inflate(R.layout.level3_pop3, null, false);
         Button back = view.findViewById(R.id.back);
         Button A = view.findViewById(R.id.A1);
         Button B = view.findViewById(R.id.B1);

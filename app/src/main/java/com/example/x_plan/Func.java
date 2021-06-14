@@ -53,7 +53,7 @@ public class Func {
     }
 
     //属性动画，role移动的图片，View需要经过的路径点,time表示每次移动的时间
-    public void Move_(ImageView role, List<View> views, int speed){
+    public AnimatorSet Move_(ImageView role, List<View> views, int speed){
         //属性动画，X是水平移动的动画，y是垂直移动的动画
         ObjectAnimator[] aniSetX = new ObjectAnimator[views.size()];
         ObjectAnimator[] aniSetY = new ObjectAnimator[views.size()];
@@ -86,6 +86,7 @@ public class Func {
 //        animatorSet.setDuration(3000);
         //启动动画
         animatorSet.start();
+        return animatorSet;
     }
 
     //识别与敌人之间的距离，role识别主体即人物，enemy所有敌人的数组，roleRange人物发现敌人的距离
@@ -97,6 +98,7 @@ public class Func {
         role.getLocationOnScreen(rolePos);
         for(int i = 0; i < enemy.length; i++){
             enemy[i].getLocationOnScreen(enemyPos);
+
             double distance = Math.sqrt(Math.abs(Math.pow((enemyPos[0] - rolePos[0]), 2) + Math.pow((enemyPos[1] - rolePos[1]), 2)));
             if(distance <= roleRange){
                 return i;
