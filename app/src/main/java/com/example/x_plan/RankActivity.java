@@ -1,6 +1,9 @@
 package com.example.x_plan;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,13 +19,20 @@ import org.json.JSONObject;
 public class RankActivity extends AppCompatActivity {
 
     private TextView RankingText;
+    private ImageView back;
+    private String username;
     String result="null";
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ranking);
+        Intent intent = getIntent();
+        this.username = (String)intent.getExtras().get("username");
+
         init();
         RankingText.setTextSize(16.0F);
+
+
 
     }
 
@@ -30,6 +40,7 @@ public class RankActivity extends AppCompatActivity {
 
     private void init(){
         //todo:格式美化等，后端还有一些数据处理。
+        back = findViewById(R.id.back);
         RankingText=findViewById(R.id.rankText);
         new Thread(new Runnable() {
             @Override
@@ -47,6 +58,21 @@ public class RankActivity extends AppCompatActivity {
                 }
             }
         }).start();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RankActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Bundle bundle = new Bundle();
+                bundle.putString("username",username);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
+
 
     }
 

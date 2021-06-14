@@ -17,23 +17,24 @@ import java.util.List;
 
 public class Func {
 
-    public Func(){}
+    public Func() {
+    }
 
     //属性动画，role移动的图片，View需要经过的路径点,time表示每次移动的时间
-    public AnimatorSet Move(ImageView role, View[] views, long[] time){
+    public AnimatorSet Move(ImageView role, View[] views, long[] time) {
         //属性动画，X是水平移动的动画，y是垂直移动的动画
         ObjectAnimator[] aniSetX = new ObjectAnimator[views.length];
         ObjectAnimator[] aniSetY = new ObjectAnimator[views.length];
         //将所有需要移动的路径生成动画，并放入数组
-        for(int i = 0; i < views.length; i++){
+        for (int i = 0; i < views.length; i++) {
             //获取坐标
             int[] rolePos = new int[2];
             int[] enemyPos = new int[2];
             role.getLocationOnScreen(rolePos);
             views[i].getLocationOnScreen(enemyPos);
             //生成属性动画
-            ObjectAnimator aniX = ObjectAnimator.ofFloat(role, "translationX", (float)(enemyPos[0] - rolePos[0]));
-            ObjectAnimator aniY = ObjectAnimator.ofFloat(role, "translationY", (float)(enemyPos[1] - rolePos[1]));
+            ObjectAnimator aniX = ObjectAnimator.ofFloat(role, "translationX", (float) (enemyPos[0] - rolePos[0]));
+            ObjectAnimator aniY = ObjectAnimator.ofFloat(role, "translationY", (float) (enemyPos[1] - rolePos[1]));
             //设置属性动画时间
             aniX.setDuration(time[i]);
             aniY.setDuration(time[i]);
@@ -44,7 +45,7 @@ public class Func {
         //属性动画集合
         AnimatorSet animatorSet = new AnimatorSet();
         //每个动画执行的顺序,play表示本次移动，with表示一起移动，before表示在play后面移动
-        for(int i = 0; i < views.length - 1; i++){
+        for (int i = 0; i < views.length - 1; i++) {
             animatorSet.play(aniSetX[i]).with(aniSetY[i]).before(aniSetX[i + 1]).before(aniSetY[i + 1]);
         }
         //启动动画
@@ -53,21 +54,21 @@ public class Func {
     }
 
     //属性动画，role移动的图片，View需要经过的路径点,time表示每次移动的时间
-    public AnimatorSet Move_(ImageView role, List<View> views, int speed){
+    public AnimatorSet Move_(ImageView role, List<View> views, int speed) {
         //属性动画，X是水平移动的动画，y是垂直移动的动画
         ObjectAnimator[] aniSetX = new ObjectAnimator[views.size()];
         ObjectAnimator[] aniSetY = new ObjectAnimator[views.size()];
         //计算运动时间
-        long[] times=new long[views.size()];
-        times[0]=500;
-        for(int i=0;i<views.size()-1;i++){
-            long time=(long) (Math.sqrt(Math.abs(Math.pow((views.get(i).getX() - views.get(i+1).getX()), 2) + Math.pow((views.get(i).getY() - views.get(i+1).getY()), 2)))/speed)*1000;
-            times[i+1]=time;
+        long[] times = new long[views.size()];
+        times[0] = 500;
+        for (int i = 0; i < views.size() - 1; i++) {
+            long time = (long) (Math.sqrt(Math.abs(Math.pow((views.get(i).getX() - views.get(i + 1).getX()), 2) + Math.pow((views.get(i).getY() - views.get(i + 1).getY()), 2))) / speed) * 1000;
+            times[i + 1] = time;
         }
         //将所有需要移动的路径生成动画，并放入数组
-        for(int i = 0; i < views.size(); i++){
+        for (int i = 0; i < views.size(); i++) {
             //生成属性动画
-            ObjectAnimator aniX = ObjectAnimator.ofFloat(role,"translationX", views.get(i).getLeft() - role.getLeft());
+            ObjectAnimator aniX = ObjectAnimator.ofFloat(role, "translationX", views.get(i).getLeft() - role.getLeft());
             ObjectAnimator aniY = ObjectAnimator.ofFloat(role, "translationY", views.get(i).getBottom() - role.getBottom());
             //设置属性动画时间
             aniX.setDuration(times[i]);
@@ -79,7 +80,7 @@ public class Func {
         //属性动画集合
         AnimatorSet animatorSet = new AnimatorSet();
         //每个动画执行的顺序,play表示本次移动，with表示一起移动，before表示在play后面移动
-        for(int i = 0; i < views.size() - 1; i++){
+        for (int i = 0; i < views.size() - 1; i++) {
             animatorSet.play(aniSetX[i]).with(aniSetY[i]).before(aniSetX[i + 1]).before(aniSetY[i + 1]);
         }
 //        //每个动画执行的时间
@@ -91,16 +92,16 @@ public class Func {
 
     //识别与敌人之间的距离，role识别主体即人物，enemy所有敌人的数组，roleRange人物发现敌人的距离
     //发现敌人，返回对应敌人的id，否则返回-1
-    public int FindEnemy(ImageView role, ImageView[] enemy, double roleRange){
+    public int FindEnemy(ImageView role, ImageView[] enemy, double roleRange) {
         //获取坐标
         int[] rolePos = new int[2];
         int[] enemyPos = new int[2];
         role.getLocationOnScreen(rolePos);
-        for(int i = 0; i < enemy.length; i++){
+        for (int i = 0; i < enemy.length; i++) {
             enemy[i].getLocationOnScreen(enemyPos);
 
             double distance = Math.sqrt(Math.abs(Math.pow((enemyPos[0] - rolePos[0]), 2) + Math.pow((enemyPos[1] - rolePos[1]), 2)));
-            if(distance <= roleRange){
+            if (distance <= roleRange) {
                 return i;
             }
         }
@@ -108,14 +109,14 @@ public class Func {
     }
 
     //识别与敌人之间的距离，role识别主体即人物，enemy所有敌人的数组，roleRange人物发现敌人的距离
-    public boolean FindEnemy_(ImageView role, View[] enemy, double roleRange){
+    public boolean FindEnemy_(ImageView role, View[] enemy, double roleRange) {
         float roleLeft = role.getX();
         float roleTop = role.getY();
-        for(int i = 0; i < enemy.length; i++){
+        for (int i = 0; i < enemy.length; i++) {
             int enemyLeft = enemy[i].getLeft();
             int enemyTop = enemy[i].getTop();
             double distance = Math.sqrt(Math.abs(Math.pow((enemyLeft - roleLeft), 2) + Math.pow((enemyTop - roleTop), 2)));
-            if(distance <= roleRange){
+            if (distance <= roleRange) {
                 return true;
             }
         }
@@ -123,27 +124,24 @@ public class Func {
     }
 
     //设置信号
-    public void setSignal(int number, boolean[] signal, boolean b){
+    public void setSignal(int number, boolean[] signal, boolean b) {
         signal[number] = b;
     }
+
     //识别信号
-    public boolean identifySignal(int number, boolean[] signal, boolean b){
-        if(signal[number] == b){
+    public boolean identifySignal(int number, boolean[] signal, boolean b) {
+        if (signal[number] == b) {
             return true;
         }
         return false;
     }
+
     //胜利条件判断
-    public boolean victory(ImageView role, ImageView EndPoint){
+    public boolean victory(ImageView role, ImageView EndPoint) {
         //获取坐标
-        int[] rolePos = new int[2];
-        int[] endPos = new int[2];
-        role.getLocationOnScreen(rolePos);
-        EndPoint.getLocationOnScreen(endPos);
-        if(rolePos[0] == endPos[0] && rolePos[1] == endPos[1]){
+        if (role.getLeft() == EndPoint.getLeft() && role.getBottom() == EndPoint.getBottom()) {
             return true;
-        }
-        else
+        } else
             return false;
     }
 }

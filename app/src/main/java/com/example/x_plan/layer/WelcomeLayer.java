@@ -3,6 +3,7 @@ package com.example.x_plan.layer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.MotionEvent;
 
 
@@ -108,11 +109,17 @@ public class WelcomeLayer extends CCLayer {
          else if (CGRect.containsPoint(help.getBoundingBox(),convertTouchNodeSpace)){
             Intent intent = new Intent(context, HelpActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Bundle bundle = new Bundle();
+            bundle.putString("username",username);
+            intent.putExtras(bundle);
             context.startActivity(intent);
         }
         else if (CGRect.containsPoint(list.getBoundingBox(),convertTouchNodeSpace)){
             Intent intent = new Intent(context, RankActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Bundle bundle = new Bundle();
+            bundle.putString("username",username);
+            intent.putExtras(bundle);
             context.startActivity(intent);
         }
 

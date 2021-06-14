@@ -2,6 +2,7 @@ package com.example.x_plan;
 
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -43,27 +44,28 @@ public class LevelTwo extends AppCompatActivity {
     private Button b = null;
     private TextView start1 = null;
     private TextView start2 = null;
-    private TextView end=null;
+    private ImageView end=null;
     private ImageView role1 = null;
     private ImageView role2 = null;
+    private boolean is_Pop1 = false;
+    private boolean is_Pop2 = false;
     final AnimatorSet[] animatorSet = new AnimatorSet[2];
 
     int[] draw1 = { R.drawable.role1_hp6,R.drawable.role1_hp5,R.drawable.role1_hp4,R.drawable.role1_hp3,R.drawable.role1_hp2,R.drawable.role1_hp1,R.drawable.role1_hp0};
     int[] draw2 = { R.drawable.role2_hp6,R.drawable.role2_hp5,R.drawable.role1_hp4,R.drawable.role2_hp3,R.drawable.role2_hp2,R.drawable.role1_hp1,R.drawable.role2_hp0};
 
+    //玩家1的线程
     private Runnable mRunnable = new Runnable() {
-
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         public void run() {
-
-//            Button run = findViewById(R.id.run);
-
-
             role1.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    initPopWindow(v,player1);
+                    if(is_Pop1 == false) {
+                        initPopWindow(v, player1);
+                        is_Pop1 = true;
+                    }
                 }
             });
             cal();
@@ -71,7 +73,7 @@ public class LevelTwo extends AppCompatActivity {
             if(is_run == true && role1_run == false){
 
                 Func f = new Func();
-                animatorSet[0] = f.Move_(player1.player,player1.views,200);
+                animatorSet[0] = f.Move_(player1.player,player1.views,150);
                 role1_run = true;
             }
             ImageView enemy = findViewById(R.id.enemy);
@@ -85,33 +87,32 @@ public class LevelTwo extends AppCompatActivity {
             if(countRole1 == draw1.length) animatorSet[0].pause();
 
 
-
-
-
-            // 每0.3秒执行一次
             mHandler.postDelayed(mRunnable, 1000);
         }
     };
 
+
+    //玩家2的线程
     private Runnable mRunnable_ = new Runnable() {
 
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @SuppressLint("LongLogTag")
         public void run() {
 
-//            Button run = findViewById(R.id.run2);
-
             role2.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    initPopWindow(v,player2);
+                    if(is_Pop2 == false) {
+                        initPopWindow(v, player2);
+                        is_Pop2 = true;
+                    }
                 }
             });
             cal();
             if(is_run == true && role2_run == false){
 
                         Func f = new Func();
-                        animatorSet[1] = f.Move_(player2.player,player2.views,100);
+                        animatorSet[1] = f.Move_(player2.player,player2.views,150);
                         role2_run = true;
             }
             ImageView enemy = findViewById(R.id.enemy);
@@ -123,12 +124,18 @@ public class LevelTwo extends AppCompatActivity {
 
             }else attackFlag = false;
             if(countRole2 == draw2.length) animatorSet[1].pause();
+            System.out.println("什么情况"+f.victory(role2,end));
 
+            if(f.victory(role2,end)) {
+                Intent activity_change= new Intent(LevelTwo.this, SuccessActivity.class);    //切换 Activityanother至MainActivity
+                Bundle bundle = new Bundle();// 创建Bundle对象
+                bundle.putInt("data",2 );//  放入data值为int型
 
+                activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
+                startActivity(activity_change);//  开始跳转
+            }
 
-
-            // 每0.3秒执行一次
-            mHandler.postDelayed(mRunnable_, 1000);
+                mHandler.postDelayed(mRunnable_, 1000);
         }
     };
 

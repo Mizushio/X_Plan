@@ -2,8 +2,12 @@ package com.example.x_plan.layer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 
+import com.example.x_plan.HelpActivity;
 import com.example.x_plan.LevelOne;
 import com.example.x_plan.RankActivity;
 import com.example.x_plan.utils.CommonUtils;
@@ -14,6 +18,8 @@ import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemSprite;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.types.CGPoint;
+import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,12 +32,14 @@ public class MenuLayer extends CCLayer {
 
     private int level;
     private Context context;
+    private String username;
+    private CCSprite back;
 
     public MenuLayer(){}
 
-    public MenuLayer(final String username, final Context context){
+    public MenuLayer(final String username, Context context){
         this.context = context;
-        System.out.println("menu发出的"+username);
+        this.username = username;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -55,12 +63,15 @@ public class MenuLayer extends CCLayer {
             }
         }).start();
 
+
         //加载背景
         CCSprite bg=CCSprite.sprite("menu/menu_bg3.png");
         bg.setAnchorPoint(0,0);
         bg.setScaleX(0.3f);
         bg.setScaleY(0.4f);
         this.addChild(bg);
+
+
 
         CCMenu menu=CCMenu.menu();
 
@@ -101,11 +112,54 @@ public class MenuLayer extends CCLayer {
         }
 
         this.addChild(menu);
+
+        back=CCSprite.sprite("menu/back.png");
+        back.setPosition(20,winSize.height-40);
+        back.setScaleX(0.15f);
+        back.setScaleY(0.2f);
+        this.addChild(back);
+
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                try{
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result){
+                setIsTouchEnabled(true);
+            }
+        }.execute();
+
+
     }
+
+    @Override
+    public boolean ccTouchesBegan(MotionEvent event){
+        CGPoint convertTouchNodeSpace=convertTouchToNodeSpace(event);
+        if(CGRect.containsPoint(back.getBoundingBox(),convertTouchNodeSpace)){
+            System.out.println("back按钮");
+            CommonUtils.changeLayer(new WelcomeLayer(username,context));
+        }
+        return super.ccTouchesBegan(event);
+    }
+
+
+
+
+
 
     public void onClick1(Object obj){
         Intent intent = new Intent(context, LevelOne.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Bundle bundle = new Bundle();// 创建Bundle对象
+        bundle.putString("username",username );
+        intent.putExtras(bundle);// 将Bundle对象放入到Intent上
         context.startActivity(intent);
     }
 

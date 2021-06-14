@@ -12,8 +12,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SignActivity" android:screenOrientation="landscape">
             <intent-filter>
-                <action android:name="android.intent.action.SIGN" />
-                <action android:name="android.intent.action.ALL_APPS" />
+<!--                <action android:name="android.intent.action.SIGN" />-->
+<!--                <action android:name="android.intent.action.ALL_APPS" />-->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
@@ -24,6 +26,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".LevelOne" android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.ALL_APPS" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SuccessActivity" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.ALL_APPS" />
             </intent-filter>

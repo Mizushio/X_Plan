@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--这里代码的是创建一个标题栏，左边是返回键-->
 <!--我们设置RelativeLayout布局，id = "title_bar"-->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/title_bar"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:typeface="serif">
+    android:background="@drawable/login">
     <!--一个是显示返回键，一个是显示标题框-->
     <!--通过TextView来显示，id ： tv_back , tv_main_title -->
 
+    <ImageView
+        android:layout_width="47dp"
+        android:layout_height="54dp"
+        android:id="@+id/back"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="677dp"
+        android:layout_marginRight="677dp"
+        android:layout_marginBottom="348dp"
+        android:src="@drawable/back_white" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:text="帮助"
-        android:textSize="150px" />
+        android:layout_width="112dp"
+        android:layout_height="38dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="308dp"
+        android:layout_marginRight="308dp"
+        android:layout_marginBottom="345dp"
+        android:text="帮助" />
 
-    <LinearLayout
-        android:layout_width="538dp"
-        android:layout_height="303dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/rankText"
-            android:layout_width="match_parent"
-            android:layout_height="270dp"
-            android:text="这是帮助，准备吧啦吧啦吧啦的写一大堆" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

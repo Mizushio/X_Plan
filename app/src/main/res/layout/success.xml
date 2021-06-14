@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/success">
+
+    <TextView
+        android:layout_width="415dp"
+        android:layout_height="148dp"
+        android:layout_marginLeft="225dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="闯关成功"
+        android:textColor="#DFFFDF"
+        android:textSize="70dp" />
+
+    <Button
+        android:layout_width="169dp"
+        android:layout_height="78dp"
+        android:id="@+id/return_"
+        android:layout_marginTop="320dp"
+        android:layout_marginLeft="150dp"
+        android:text="选择关卡"
+        android:textSize="20dp"
+        android:background="@drawable/button"
+        android:textColor="#336666"
+        />
+    <Button
+        android:layout_width="169dp"
+        android:layout_height="78dp"
+        android:id="@+id/next_"
+        android:layout_marginTop="320dp"
+        android:layout_marginLeft="380dp"
+        android:text="下一关"
+        android:textSize="20dp"
+        android:background="@drawable/button"
+        android:textColor="#336666"
+        />
+
+
+</RelativeLayout>

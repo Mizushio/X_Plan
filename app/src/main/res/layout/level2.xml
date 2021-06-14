@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/map_level2">
+    android:background="@drawable/map2">
+
 
     <Button
         android:id="@+id/A"
@@ -12,49 +13,61 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="374dp"
-        android:layout_marginRight="374dp"
-        android:layout_marginBottom="158dp"
+        android:layout_marginEnd="497dp"
+        android:layout_marginRight="497dp"
+        android:layout_marginBottom="73dp"
         android:text="A" />
-
-    <TextView
-        android:id="@+id/start1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:layout_marginLeft="10dp"
-        android:text="起点1" />
 
     <TextView
         android:id="@+id/start2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="250dp"
+        android:layout_marginEnd="688dp"
+        android:layout_marginRight="688dp"
+        android:layout_marginBottom="137dp"
         android:text="起点2" />
 
     <TextView
+        android:id="@+id/start1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="633dp"
+        android:layout_marginRight="633dp"
+        android:layout_marginBottom="136dp"
+        android:text="起点1" />
+
+    <ImageView
+        android:id="@+id/end"
         android:layout_width="55dp"
         android:layout_height="50dp"
-        android:text="终点"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="160dp"
-        android:id="@+id/end"/>
-
+        android:layout_marginLeft="500dp"
+        android:layout_marginTop="300dp"
+        android:src="@drawable/button"
+        android:text="终点" />
 
     <Button
         android:id="@+id/B"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="179dp"
-        android:layout_marginBottom="243dp"
+        android:layout_marginEnd="248dp"
+        android:layout_marginRight="248dp"
+        android:layout_marginBottom="65dp"
         android:text="B"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="61dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="179dp" />
+        tools:layout_editor_absoluteY="61dp" />
 
     <ImageView
         android:id="@+id/role1"
@@ -65,7 +78,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="631dp"
         android:layout_marginRight="631dp"
-        android:layout_marginBottom="145dp"
+        android:layout_marginBottom="164dp"
         android:src="@drawable/role1_hp6" />
 
     <ImageView
@@ -75,10 +88,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="686dp"
-        android:layout_marginRight="686dp"
-        android:layout_marginBottom="147dp"
-        android:src="@drawable/role1_hp6" />
+        android:layout_marginEnd="681dp"
+        android:layout_marginRight="681dp"
+        android:layout_marginBottom="169dp"
+        android:src="@drawable/role2_hp6" />
 
     <Button
         android:id="@+id/run"
@@ -102,9 +115,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="532dp"
-        android:layout_marginRight="532dp"
-        android:layout_marginBottom="244dp"
+        android:layout_marginEnd="384dp"
+        android:layout_marginRight="384dp"
+        android:layout_marginBottom="186dp"
         android:src="@drawable/cat" />
 
 

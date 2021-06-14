@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,11 +33,14 @@ import java.sql.Array;
 public class LevelOne extends AppCompatActivity {
     private Spinner ins = null;
     public String str = "";
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level1);
+        Intent intent = getIntent();
+        this.username = (String)intent.getExtras().get("username");
 
         ins = findViewById(R.id.instruction);
         ins.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
