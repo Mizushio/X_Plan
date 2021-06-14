@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存" />
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="返回"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择需要设置的信号量"
+        android:textSize="30dp" />
+    <TextView
+        android:id="@+id/choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <CheckBox
+                android:id="@+id/signal1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="先后出发触发信号量" />
+            <CheckBox
+                android:id="@+id/signal2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无" />
+            <CheckBox
+                android:id="@+id/signal3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无" />
+            <CheckBox
+                android:id="@+id/signal4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <CheckBox
+                android:id="@+id/signal5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无"/>
+            <CheckBox
+                android:id="@+id/signal6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无" />
+            <CheckBox
+                android:id="@+id/signal7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无" />
+            <CheckBox
+                android:id="@+id/signal8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
