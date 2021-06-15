@@ -6,20 +6,29 @@
     android:background="@drawable/map3">
 
     <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/enter"
+        android:id="@+id/start2"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="290dp"
+        android:src="@drawable/enter"
+        android:id="@+id/start1"/>
+
+
+    <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/end"
+        android:src="@drawable/exit"
         android:layout_marginTop="180dp"
         android:layout_alignParentRight="true"
         android:id="@+id/end"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginLeft="250dp"
-        android:id="@+id/position1" />
+
 
     <ImageView
         android:id="@+id/tower1"
@@ -28,7 +37,15 @@
         android:layout_marginLeft="250dp"
         android:layout_marginTop="150dp"
         android:src="@drawable/death"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="250dp"
+        android:src="@drawable/biaozhi1"
+        android:id="@+id/position1" />
 
     <Button
         android:id="@+id/submit"
@@ -57,14 +74,8 @@
         android:id="@+id/player1"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="260dp"
         android:src="@drawable/role1_hp6" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:text="玩家1"
-        android:id="@+id/start1"/>
 
     <ImageView
         android:id="@+id/player2"
@@ -73,11 +84,5 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/role2_hp6" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="起点2"
-        android:id="@+id/start2"/>
 
 </RelativeLayout>
