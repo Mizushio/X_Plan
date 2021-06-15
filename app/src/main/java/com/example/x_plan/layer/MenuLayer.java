@@ -206,6 +206,14 @@ public class MenuLayer extends CCLayer {
         intent.putExtras(bundle);// 将Bundle对象放入到Intent上
         context.startActivity(intent);
     }
+    public void onClick4(Object obj){
+        Intent intent = new Intent(context, LevelFive.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Bundle bundle = new Bundle();// 创建Bundle对象
+        bundle.putString("username",username );
+        intent.putExtras(bundle);// 将Bundle对象放入到Intent上
+        context.startActivity(intent);
+    }
     public void onClick5(Object obj){
         Intent intent = new Intent(context, LevelFive.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
