@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class LevelOne extends AppCompatActivity {
@@ -32,7 +31,7 @@ public class LevelOne extends AppCompatActivity {
     private ImageView a;
     private ImageView b;
     private ImageView end;
-    private Button barrier;
+    private ImageView barrier;
     private AnimatorSet animatorSet = null;  //属性动画集合
     private Func f = new Func();
     private ImageView role1;
@@ -53,9 +52,7 @@ public class LevelOne extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(isRun == 0){
-                        if(isRun == 0){
-                            initPopWindow(v);
-                        }
+                        initPopWindow(v);
                     }
                 }
             });
@@ -72,7 +69,6 @@ public class LevelOne extends AppCompatActivity {
                     }
                 }
                 View[] views = new View[count1];
-                long[] time = new long[count1];
                 for(int i = 0; i < views.length; i++){
                     if(MoveChoose[i] == 1){
                         views[i] = a;
@@ -83,7 +79,6 @@ public class LevelOne extends AppCompatActivity {
                     else if(MoveChoose[i] == 3){
                         views[i] = end;
                     }
-                    time[i] = 3000;
                 }
                 animatorSet = f.Move(role1, views, speed);
             }

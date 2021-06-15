@@ -93,7 +93,6 @@ public class LevelFive extends AppCompatActivity {
             if(isRun == 1){
                 isRun = 2;
                 //启动敌人移动
-                long[] time = {3000,3000,3000,3000};
                 animatorSet[2] = f.Move(enemy, points, enemySpeed, enemyTimes);
                 //获取指令1的移动指令
                 if (MoveChoose1[0] != 0) {
@@ -106,14 +105,12 @@ public class LevelFive extends AppCompatActivity {
                         }
                     }
                     View[] views = new View[count1];
-                    long[] time1 = new long[count1];
                     for (int i = 0; i < views.length; i++) {
                         if (MoveChoose1[i] == 1) {
                             views[i] = a;
                         } else if (MoveChoose1[i] == 2) {
                             views[i] = b;
                         }
-                        time1[i] = 3000;
                     }
                     animatorSet[0] = f.Move(role3, views, speed);
                     animatorSet[0].cancel();
@@ -129,14 +126,12 @@ public class LevelFive extends AppCompatActivity {
                         }
                     }
                     View[] views = new View[count2];
-                    long[] time1 = new long[count2];
                     for (int i = 0; i < views.length; i++) {
                         if (MoveChoose2[i] == 1) {
                             views[i] = a;
                         } else if (MoveChoose2[i] == 2) {
                             views[i] = b;
                         }
-                        time1[i] = 3000;
                     }
                     animatorSet[1] = f.Move(role3, views, speed);
                     animatorSet[1].cancel();
