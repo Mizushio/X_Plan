@@ -29,10 +29,10 @@ public class LevelThree extends AppCompatActivity{
     private String username;
     private Button sumbit=null;//确定
     private Button instroduction=null;//游戏说明
-    private TextView start1=null;//起点1
-    private TextView start2=null;//起点2
+    private ImageView start1=null;//起点1
+    private ImageView start2=null;//起点2
     private ImageView end=null;//终点
-    private TextView position1=null;//地点1
+    private ImageView position1=null;//地点1
     private Player player1=new Player();
     private Player player2=new Player();
     private ImageView tower1=null;//塔楼一
@@ -134,10 +134,10 @@ public class LevelThree extends AppCompatActivity{
     private void init(){
         sumbit=(Button)findViewById(R.id.submit);
         instroduction=(Button)findViewById(R.id.introduction);
-        start1=(TextView)findViewById(R.id.start1);
-        start2=(TextView)findViewById(R.id.start2);
+        start1=(ImageView)findViewById(R.id.start1);
+        start2=(ImageView)findViewById(R.id.start2);
         end=(ImageView) findViewById(R.id.end);
-        position1=(TextView)findViewById(R.id.position1);
+        position1=(ImageView)findViewById(R.id.position1);
         player1.player=(ImageView) findViewById(R.id.player1);
         player1.views.add(start1);
         player1.views.add(position1);
@@ -210,6 +210,7 @@ public class LevelThree extends AppCompatActivity{
                 Intent activity_change= new Intent(LevelThree.this, ErrorActivity.class);    //切换 Activity
                 Bundle bundle = new Bundle();// 创建Bundle对象
                 bundle.putString("username",username);
+                bundle.putInt("data",3);
                 activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
                 startActivity(activity_change);//  开始跳转
                 is_finish = true;
