@@ -38,6 +38,7 @@ public class LevelSix extends AppCompatActivity {
     private ImageView back_ = null;//返回按钮
     private boolean is_finish = false;
     private Button begin=null;//启动
+    private Button instruction=null;//游戏说明
     private ImageView start1,start2;//两个起点
     private ImageView end;//终点
     private Player player1=new Player();//玩家一
@@ -57,11 +58,10 @@ public class LevelSix extends AppCompatActivity {
     private boolean flag=false;
     private boolean ifBossDied=false;
     //攻击半径
-    private int player1R=450;
-    private int player2R=600;
-    private int enemyR=300;
-    private int bossR=500;
-
+    private int player1R=300;
+    private int player2R=400;
+    private int enemyR=200;
+    private int bossR=400;
 
     private int time=15;
     private int time2=15;
@@ -145,6 +145,12 @@ public class LevelSix extends AppCompatActivity {
                 }
             }
         });
+        instruction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initInstructionWindow(view);
+            }
+        });
     }
 
     private boolean isSetPath(Player player){
@@ -166,6 +172,7 @@ public class LevelSix extends AppCompatActivity {
 
     private void init(){
         begin=(Button)findViewById(R.id.begin);
+        instruction=(Button)findViewById(R.id.instruction);
 
         back_ = findViewById(R.id.back_);
         msg=(TextView)findViewById(R.id.msg);
@@ -260,8 +267,7 @@ public class LevelSix extends AppCompatActivity {
             if(enemyDiedCount==3){
                 player1.setSignal(true, 0);
             }
-
-            handler1.postDelayed(player1Runnable, 200);
+            handler1.postDelayed(player1Runnable, 300);
         }
     };
 
@@ -295,7 +301,7 @@ public class LevelSix extends AppCompatActivity {
             if (f.FindEnemy_(player2.player, enemies, enemyR)&& count2 < draw2.length) {
                 attackFlag = true;
                 player2.player.setImageDrawable(getResources().getDrawable(draw2[(int)count2]));
-                count2=count2+0.3;
+                count2=count2+0.4;
             } else {
                 attackFlag = false;
             }
@@ -303,12 +309,12 @@ public class LevelSix extends AppCompatActivity {
             if ((f.FindEnemy_(player2.player, boss, bossR)||f.FindEnemy_(player2.player, blocks, 0)) && count2 < draw2.length) {
                 attackFlag = true;
                 player2.player.setImageDrawable(getResources().getDrawable(draw2[(int)count2]));
-                count2=count2+0.6;
+                count2=count2+0.8;
             } else {
                 attackFlag = false;
             }
             if (count2 >= draw2.length) {
-                animatorSet[1].pause();
+                animatorSet[1].end();
                 player2.ifDied = true;
             }
 
@@ -328,7 +334,7 @@ public class LevelSix extends AppCompatActivity {
             }
 
             if(player2.ifDied||ifWin){
-                animatorSet[1].pause();
+                animatorSet[1].end();
             }
             else {
                 if(!flag){
@@ -337,9 +343,8 @@ public class LevelSix extends AppCompatActivity {
                         flag=true;
                     } else animatorSet[1].pause();
                 }
-
             }
-            handler2.postDelayed(player2Runnable, 200);
+            handler2.postDelayed(player2Runnable, 300);
         }
     };
 
@@ -389,7 +394,7 @@ public class LevelSix extends AppCompatActivity {
                     if (i != -1) {
                         if (bossCount < draw4.length) {
                             boss[i].setImageDrawable(getResources().getDrawable(draw4[(int) bossCount]));
-                            bossCount = bossCount + 0.8;
+                            bossCount = bossCount + 1;
                         } else {
                             ifBossDied = true;
                             ViewGroup parent = (ViewGroup) boss[i].getParent();
@@ -841,4 +846,24 @@ public class LevelSix extends AppCompatActivity {
         });
     }
 
+    private void initInstructionWindow(View v){
+        View view = LayoutInflater.from(LevelSix.this).inflate(R.layout.level6_instruction, null, false);
+        Button back = view.findViewById(R.id.close);
+        TextView instruction=view.findViewById(R.id.introduction_text);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popupWindow.setAnimationStyle(R.anim.anim_pop);
+        popupWindow.setTouchable(true);
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) { return false; }
+        });
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.showAsDropDown(v, 100 - v.getLeft(), -v.getBottom());
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+    }
 }

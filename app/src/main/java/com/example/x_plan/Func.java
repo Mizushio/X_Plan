@@ -19,21 +19,32 @@ public class Func {
 
     public Func(){}
 
-    //属性动画，role移动的图片，View需要经过的路径点,time表示每次移动的时间
-    public AnimatorSet Move(ImageView role, View[] views, long[] time) {
+    //属性动画，role移动的图片，View需要经过的路径点,speed表示1s移动的距离
+    public AnimatorSet Move(ImageView role, View[] views, int speed){
         //属性动画，X是水平移动的动画，y是垂直移动的动画
         ObjectAnimator[] aniSetX = new ObjectAnimator[views.length];
         ObjectAnimator[] aniSetY = new ObjectAnimator[views.length];
+        long[] time = new long[views.length];
+        int[] rolePos = new int[2];
+        int[] enemyPos = new int[2];
+        int[] enemyPos1 = new int[2];
+        role.getLocationOnScreen(rolePos);
+        views[0].getLocationOnScreen(enemyPos);
+        time[0] = (long) ((Math.sqrt(Math.abs(Math.pow((rolePos[0] - enemyPos[0]), 2) + Math.pow((rolePos[1] - enemyPos[1]), 2)))/speed)*1000);
+        //计算每段距离使用的时间
+        for(int i = 0; i < views.length - 1; i++){
+            views[i].getLocationOnScreen(enemyPos);
+            views[i + 1].getLocationOnScreen(enemyPos1);
+            time[i + 1] = (long) ((Math.sqrt(Math.abs(Math.pow((enemyPos1[0] - enemyPos[0]), 2) + Math.pow((enemyPos1[1] - enemyPos[1]), 2)))/speed)*1000);
+        }
         //将所有需要移动的路径生成动画，并放入数组
-        for (int i = 0; i < views.length; i++) {
+        for(int i = 0; i < views.length; i++){
             //获取坐标
-            int[] rolePos = new int[2];
-            int[] enemyPos = new int[2];
             role.getLocationOnScreen(rolePos);
             views[i].getLocationOnScreen(enemyPos);
             //生成属性动画
-            ObjectAnimator aniX = ObjectAnimator.ofFloat(role, "translationX", (float) (enemyPos[0] - rolePos[0]));
-            ObjectAnimator aniY = ObjectAnimator.ofFloat(role, "translationY", (float) (enemyPos[1] - rolePos[1]));
+            ObjectAnimator aniX = ObjectAnimator.ofFloat(role, "translationX", (float)(enemyPos[0] - rolePos[0]));
+            ObjectAnimator aniY = ObjectAnimator.ofFloat(role, "translationY", (float)(enemyPos[1] - rolePos[1]));
             //设置属性动画时间
             aniX.setDuration(time[i]);
             aniY.setDuration(time[i]);
@@ -54,16 +65,26 @@ public class Func {
         animatorSet.start();
         return animatorSet;
     }
-
-    public AnimatorSet Move(ImageView role, View[] views, long[] time, int times){
+    public AnimatorSet Move(ImageView role, View[] views, int speed, int times){
         //属性动画，X是水平移动的动画，y是垂直移动的动画
         ObjectAnimator[] aniSetX = new ObjectAnimator[views.length * times];
         ObjectAnimator[] aniSetY = new ObjectAnimator[views.length * times];
+        long[] time = new long[views.length];
+        int[] rolePos = new int[2];
+        int[] enemyPos = new int[2];
+        int[] enemyPos1 = new int[2];
+        role.getLocationOnScreen(rolePos);
+        views[0].getLocationOnScreen(enemyPos);
+        time[0] = (long) ((Math.sqrt(Math.abs(Math.pow((rolePos[0] - enemyPos[0]), 2) + Math.pow((rolePos[1] - enemyPos[1]), 2)))/speed)*1000);
+        //计算每段距离使用的时间
+        for(int i = 0; i < views.length - 1; i++){
+            views[i].getLocationOnScreen(enemyPos);
+            views[i + 1].getLocationOnScreen(enemyPos1);
+            time[i + 1] = (long) ((Math.sqrt(Math.abs(Math.pow((enemyPos1[0] - enemyPos[0]), 2) + Math.pow((enemyPos1[1] - enemyPos[1]), 2)))/speed)*1000);
+        }
         //将所有需要移动的路径生成动画，并放入数组
         for(int i = 0; i < aniSetX.length; i++){
             //获取坐标
-            int[] rolePos = new int[2];
-            int[] enemyPos = new int[2];
             role.getLocationOnScreen(rolePos);
             views[i % views.length].getLocationOnScreen(enemyPos);
             //生成属性动画

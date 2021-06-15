@@ -48,6 +48,7 @@ public class LevelOne extends AppCompatActivity {
     private int barrierWidth = 0;
     private int barrierHeight = 0;
     private ImageView barrier = null;
+    private int speed = 300;     //移动速度
     private Handler mHandRole1 = new Handler();
 
     int[] rolePic = { R.drawable.role1_hp6,R.drawable.role1_hp5,R.drawable.role1_hp4,R.drawable.role1_hp3,R.drawable.role1_hp2,R.drawable.role1_hp1,R.drawable.role1_hp0};
@@ -78,7 +79,6 @@ public class LevelOne extends AppCompatActivity {
                     }
                 }
                 View[] views = new View[count1];
-                long[] time = new long[count1];
                 for(int i = 0; i < views.length; i++){
                     if(MoveChoose[i] == 1){
                         views[i] = a;
@@ -89,9 +89,8 @@ public class LevelOne extends AppCompatActivity {
                     else if(MoveChoose[i] == 3){
                         views[i] = end;
                     }
-                    time[i] = 3000;
                 }
-                animatorSet = f.Move(role1, views, time);
+                animatorSet = f.Move(role1, views, speed);
             }
             //判断是否接触到障碍物
             if(isRun == 2){
@@ -142,8 +141,6 @@ public class LevelOne extends AppCompatActivity {
         b = findViewById(R.id.B);
         end = findViewById(R.id.end);
         barrier = findViewById(R.id.barrier);
-
-
     }
 
     @Override
@@ -156,7 +153,6 @@ public class LevelOne extends AppCompatActivity {
 
         //初始化
         init();
-
         //启动玩家1的线程
         mHandRole1.post(mRunRole);
 

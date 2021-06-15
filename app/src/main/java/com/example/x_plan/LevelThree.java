@@ -459,7 +459,7 @@ public class LevelThree extends AppCompatActivity{
         View view = LayoutInflater.from(LevelThree.this).inflate(R.layout.level3_introduction, null, false);
         Button back = view.findViewById(R.id.close);
         TextView instruction=view.findViewById(R.id.introduction_text);
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {

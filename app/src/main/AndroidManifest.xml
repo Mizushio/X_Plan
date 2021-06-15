@@ -56,28 +56,19 @@
                 <action android:name="android.intent.action.ALL_APPS" />
             </intent-filter>
         </activity>
-        <activity android:name=".SpinnerActivity"  android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.SPINNER" />
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            </intent-filter>
-        </activity>
         <activity android:name=".LevelThree"  android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.FIGHT3" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".LevelSix"  android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.LEVELSIX" />
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
         <activity android:name=".LevelFive"  android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.FIGHT3" />
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
