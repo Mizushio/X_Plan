@@ -41,12 +41,14 @@ public class LevelOne extends AppCompatActivity {
     private ImageView a;
     private ImageView b;
     private ImageView end;
+    private ImageView barrier;
     private AnimatorSet animatorSet = null;  //属性动画集合
     private Func f = new Func();
     private ImageView role1;
     private int hp = 6;
     private int barrierWidth = 200;
     private int barrierHeight = 200;
+    private int speed = 300;     //移动速度
     private Handler mHandRole1 = new Handler();
 
     int[] rolePic = { R.drawable.role1_hp6,R.drawable.role1_hp5,R.drawable.role1_hp4,R.drawable.role1_hp3,R.drawable.role1_hp2,R.drawable.role1_hp1,R.drawable.role1_hp0};
@@ -77,7 +79,6 @@ public class LevelOne extends AppCompatActivity {
                     }
                 }
                 View[] views = new View[count1];
-                long[] time = new long[count1];
                 for(int i = 0; i < views.length; i++){
                     if(MoveChoose[i] == 1){
                         views[i] = a;
@@ -88,19 +89,18 @@ public class LevelOne extends AppCompatActivity {
                     else if(MoveChoose[i] == 3){
                         views[i] = end;
                     }
-                    time[i] = 3000;
                 }
-                animatorSet = f.Move(role1, views, time);
+                animatorSet = f.Move(role1, views, speed);
             }
             //判断是否接触到障碍物
             if(isRun == 2){
                 int[] rolePos = new int[2];
                 int[] barrierPos = new int[2];
                 role1.getLocationOnScreen(rolePos);
-                end.getLocationOnScreen(barrierPos);
+                barrier.getLocationOnScreen(barrierPos);
                 if(Math.abs(barrierPos[0] - rolePos[0]) <= barrierWidth && Math.abs(barrierPos[1] - rolePos[1]) <= barrierHeight && hp >= 0){
-//                    hp = 0;
-//                    role1.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                    hp = 0;
+                    role1.setImageDrawable(getResources().getDrawable(rolePic[hp]));
                 }
             }
             //当hp为0时，停止运行
@@ -139,6 +139,7 @@ public class LevelOne extends AppCompatActivity {
         a = findViewById(R.id.A);
         b = findViewById(R.id.B);
         end = findViewById(R.id.end);
+        barrier = findViewById(R.id.barrier);
     }
 
     @Override
