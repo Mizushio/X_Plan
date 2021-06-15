@@ -25,9 +25,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="531dp"
-        android:layout_marginLeft="531dp"
-        android:layout_marginBottom="286dp"
+        android:layout_marginStart="560dp"
+        android:layout_marginLeft="560dp"
+        android:layout_marginBottom="288dp"
         android:src="@drawable/point" />
 
     <ImageView
@@ -37,9 +37,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="529dp"
-        android:layout_marginLeft="529dp"
-        android:layout_marginBottom="95dp"
+        android:layout_marginStart="562dp"
+        android:layout_marginLeft="562dp"
+        android:layout_marginBottom="97dp"
         android:src="@drawable/point" />
 
     <ImageView
