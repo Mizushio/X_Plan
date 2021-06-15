@@ -78,6 +78,11 @@ public class SuccessActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (level){
                     case 1:
+                        Intent activity_change = new Intent(SuccessActivity.this, LevelTwo.class);    //切换 Activityanother至MainActivity
+                        Bundle bundle = new Bundle();// 创建Bundle对象
+                        bundle.putString("username",username);
+                        activity_change.putExtras(bundle);
+                        startActivity(activity_change);//  开始跳转
 
                         break;
                     case 2:
@@ -96,13 +101,18 @@ public class SuccessActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        Intent activity_change4= new Intent(SuccessActivity.this, LevelThree.class);    //切换 Activityanother至MainActivity
+                        Intent activity_change4= new Intent(SuccessActivity.this, LevelFive.class);    //切换 Activityanother至MainActivity
                         Bundle bundle4 = new Bundle();// 创建Bundle对象
+                        bundle4.putString("username",username);
+                        activity_change4.putExtras(bundle4);
                         startActivity(activity_change4);//  开始跳转
                         break;
+
                     case 5:
-                        Intent activity_change5= new Intent(SuccessActivity.this, LevelThree.class);    //切换 Activityanother至MainActivity
+                        Intent activity_change5= new Intent(SuccessActivity.this, LevelSix.class);    //切换 Activityanother至MainActivity
                         Bundle bundle5 = new Bundle();// 创建Bundle对象
+                        bundle5.putString("username",username);
+                        activity_change5.putExtras(bundle5);
                         startActivity(activity_change5);//  开始跳转
                         break;
 

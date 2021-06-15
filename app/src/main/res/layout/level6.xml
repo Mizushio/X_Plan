@@ -9,9 +9,16 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/exit"
-        android:layout_marginTop="290dp"
+        android:layout_marginTop="280dp"
         android:layout_alignParentRight="true"
         android:id="@+id/end"/>
+    <ImageView
+        android:id="@+id/back_"
+        android:layout_width="47dp"
+        android:layout_height="54dp"
+
+        android:src="@drawable/back_white"
+        android:layout_marginTop="350dp"/>
 
     <ImageView
         android:layout_width="45dp"
@@ -24,14 +31,14 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/position_2"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="220dp"
         android:layout_marginLeft="260dp"
         android:id="@+id/B" />
     <ImageView
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/position_3"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="220dp"
         android:layout_marginLeft="420dp"
         android:id="@+id/C" />
     <ImageView
@@ -74,19 +81,31 @@
         android:text="开始游戏"
         android:textStyle="bold"
         android:textColor="@android:color/white"/>
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="-3dp"
+        android:background="#00000000"
+        android:text="重新开始"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/introduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00000000"
         android:layout_alignParentRight="true"
-        android:textSize="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="-2dp"
+        android:background="#00000000"
         android:text="说明"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"/>
-
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -145,12 +164,12 @@
         android:id="@+id/block4"/>
 
     <ImageView
+        android:id="@+id/boss"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/deathhp5"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="530dp"
-        android:id="@+id/boss"/>
+        android:layout_marginLeft="590dp"
+        android:layout_marginTop="165dp"
+        android:src="@drawable/deathhp5" />
 
     <TextView
         android:layout_width="wrap_content"

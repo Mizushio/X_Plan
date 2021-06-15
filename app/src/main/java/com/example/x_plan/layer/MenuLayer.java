@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
+import com.example.x_plan.LevelFive;
 import com.example.x_plan.LevelOne;
+import com.example.x_plan.LevelSix;
 import com.example.x_plan.LevelThree;
 import com.example.x_plan.LevelTwo;
 import com.example.x_plan.utils.CommonUtils;
@@ -22,6 +24,8 @@ import org.cocos2d.types.CGRect;
 import org.cocos2d.types.CGSize;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.logging.Level;
 
 public class MenuLayer extends CCLayer {
     protected CGSize winSize= CCDirector.sharedDirector().winSize();
@@ -47,13 +51,10 @@ public class MenuLayer extends CCLayer {
                     resCode=jsonObject.getString("all");
 
                     if(resCode != null){
-                        System.out.println("我没进去吗?");
                         level = Integer.parseInt(resCode);
                         level_ok = true;
 
                     }
-                    System.out.println("到底第几关"+level);
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -105,16 +106,30 @@ public class MenuLayer extends CCLayer {
             CCSprite game5=CCSprite.sprite("menu/game5.png");
             CCMenuItemSprite itemSprite5=CCMenuItemSprite.item(game5,game5,this,"onClick5");
             itemSprite5.setScale(0.15f);
-            itemSprite5.setPosition(-60,winSize.height/2-130);
+            itemSprite5.setPosition(-30,winSize.height/2-110);
+            CCSprite game6=CCSprite.sprite("menu/game6.png");
+            CCMenuItemSprite itemSprite6=CCMenuItemSprite.item(game6,game6,this,"onClick6");
+            itemSprite6.setScale(0.15f);
+            itemSprite6.setPosition(20,winSize.height/2-173);
 
-            CCMenuItemSprite[] levelArray = new CCMenuItemSprite[5];
+            CCMenuItemSprite[] levelArray = new CCMenuItemSprite[6];
             levelArray[0] = itemSprite1;
             levelArray[1] = itemSprite2;
             levelArray[2] = itemSprite3;
             levelArray[3] = itemSprite4;
             levelArray[4] = itemSprite5;
-            for(int i = 0;i <= level;i++) {
-                menu.addChild(levelArray[i]);
+            levelArray[5] = itemSprite6;
+
+            if(level<6) {
+                for (int i = 0; i <= level; i++) {
+                    menu.addChild(levelArray[i]);
+                }
+            }else {
+                for (int i = 0; i <= 5; i++) {
+                    menu.addChild(levelArray[i]);
+                }
+
+
             }
 
 
@@ -191,6 +206,23 @@ public class MenuLayer extends CCLayer {
         intent.putExtras(bundle);// 将Bundle对象放入到Intent上
         context.startActivity(intent);
     }
+    public void onClick5(Object obj){
+        Intent intent = new Intent(context, LevelFive.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Bundle bundle = new Bundle();// 创建Bundle对象
+        bundle.putString("username",username );
+        intent.putExtras(bundle);// 将Bundle对象放入到Intent上
+        context.startActivity(intent);
+    }
+    public void onClick6(Object obj){
+        Intent intent = new Intent(context, LevelSix.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Bundle bundle = new Bundle();// 创建Bundle对象
+        bundle.putString("username",username );
+        intent.putExtras(bundle);// 将Bundle对象放入到Intent上
+        context.startActivity(intent);
+    }
+
 
 
 

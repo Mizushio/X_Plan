@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -19,6 +20,12 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.x_plan.layer.MenuLayer;
+
+import org.cocos2d.layers.CCScene;
+import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.opengl.CCGLSurfaceView;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -26,6 +33,7 @@ import java.util.Map;
 public class LevelTwo extends AppCompatActivity {
 
     private String username;
+    private ImageView back_ = null;//返回按钮
     private Player player1 = new Player();
     private Player player2 = new Player();
     private Func f = new Func();
@@ -80,7 +88,7 @@ public class LevelTwo extends AppCompatActivity {
             final ImageView[] notGoViews = new ImageView[]{notGo};
             if(is_run == true && f.FindEnemy(role1,notGoViews,100) == 0)
 
-           {     System.out.println("haha");
+           {
                 countRole1=draw1.length - 1;
                 role1.setImageDrawable(getResources().getDrawable(draw1[countRole1]));
                 countRole1++;
@@ -95,12 +103,13 @@ public class LevelTwo extends AppCompatActivity {
             }
             ImageView enemy = findViewById(R.id.enemy);
             final ImageView[] enemyViews = new ImageView[]{enemy};
-            if(f.FindEnemy(role1,enemyViews,400) == 0 && countRole1<draw1.length && attackFlag==false){
-                role1.setImageDrawable(getResources().getDrawable(draw1[countRole1]));
-                countRole1++;
-                attackFlag = true;
+            System.out.println("try"+enemyViews.length);
+                if (is_finish == false && f.FindEnemy(role1, enemyViews, 400) == 0 && countRole1 < draw1.length && attackFlag == false) {
+                    role1.setImageDrawable(getResources().getDrawable(draw1[countRole1]));
+                    countRole1++;
+                    attackFlag = true;
+                } else attackFlag = false;
 
-            }else attackFlag = false;
             if(countRole1 == draw1.length) {
                 animatorSet[0].pause();
                 is_dead1=true;}
@@ -144,7 +153,7 @@ public class LevelTwo extends AppCompatActivity {
             }
             ImageView enemy = findViewById(R.id.enemy);
             final ImageView[] enemyViews = new ImageView[]{enemy};
-            if(f.FindEnemy(role2,enemyViews,400) == 0 && countRole2 < draw2.length && attackFlag==false){
+            if(is_finish == false && f.FindEnemy(role2,enemyViews,400) == 0 && countRole2 < draw2.length && attackFlag==false){
                 role2.setImageDrawable(getResources().getDrawable(draw2[countRole2]));
                 countRole2++;
                 attackFlag = true;
@@ -269,7 +278,7 @@ public class LevelTwo extends AppCompatActivity {
         two_text.setText(player.getIns_text(1));
         three_text.setText(player.getIns_text(2));
 
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 1000, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -278,7 +287,7 @@ public class LevelTwo extends AppCompatActivity {
                 return false;
             }
         });
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x80808080));
         popupWindow.showAsDropDown(v, 100 - v.getLeft(), -v.getBottom());
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -314,7 +323,7 @@ public class LevelTwo extends AppCompatActivity {
         if(player.getIns_text(ins)!= ""){
             ins1.setText(player.getIns_text(ins) + "\n");
         }
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -363,7 +372,7 @@ public class LevelTwo extends AppCompatActivity {
 
         Button save = view.findViewById(R.id.save1);
         final TextView choose = view.findViewById(R.id.choose);
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -455,6 +464,7 @@ public class LevelTwo extends AppCompatActivity {
         start2 = findViewById(R.id.start2);
         run =  findViewById(R.id.run);
         notGo = findViewById(R.id.notGo);
+        back_ = findViewById(R.id.back_);
 
         final ImageView enemy = findViewById(R.id.enemy);
 
@@ -481,7 +491,54 @@ public class LevelTwo extends AppCompatActivity {
         this.username = (String)intent.getExtras().get("username");
 
         init();
+
+        Button restart = findViewById(R.id.reset);
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity_change = new Intent(LevelTwo.this, LevelTwo.class);    //切换 Activityanother至MainActivity
+                Bundle bundle = new Bundle();// 创建Bundle对象
+                bundle.putString("username",username);
+                activity_change.putExtras(bundle);
+                startActivity(activity_change);//  开始跳转
+            }
+        });
+
+        back_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDestroy();
+                is_finish = true;
+                CCDirector director = null;
+
+                CCGLSurfaceView ccglSurfaceView=new CCGLSurfaceView(LevelTwo.this);
+                setContentView(ccglSurfaceView);
+
+                director=CCDirector.sharedDirector();
+                director.attachInView(ccglSurfaceView);
+
+                director.setDisplayFPS(true);//显示帧率
+                //设置为横屏显示
+                director.setDeviceOrientation(CCDirector.kCCDeviceOrientationLandscapeLeft);
+                //可以等比例缩放
+                director.setScreenSize(480,320);
+
+
+                //创建一个情景来显示游戏界面
+                CCScene ccScene=CCScene.node();
+                //将Layer层加到场景中
+                try {
+                    ccScene.addChild(new MenuLayer(username,LevelTwo.this));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //运行场景
+                director.runWithScene(ccScene);
+            }
+        });
+
         // 通过Handler启动线程
+
         mHandler.post(mRunnable);  //玩家1
         mHandler_.post(mRunnable_); //玩家2
         runHandler.post(runRunnable);
@@ -492,11 +549,6 @@ public class LevelTwo extends AppCompatActivity {
     protected void onDestroy() {
         //将线程销毁掉
         mHandler.removeCallbacks(mRunnable);
-        try {
-            Thread.sleep(70000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         mHandler_.removeCallbacks(mRunnable_);
         super.onDestroy();
     }

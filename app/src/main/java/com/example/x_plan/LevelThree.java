@@ -10,15 +10,23 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.x_plan.layer.MenuLayer;
+
+import org.cocos2d.layers.CCScene;
+import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.opengl.CCGLSurfaceView;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,6 +35,7 @@ import java.util.Map;
 public class LevelThree extends AppCompatActivity{
 
     private String username;
+    private ImageView back_ = null;//返回按钮
     private Button sumbit=null;//确定
     private Button instroduction=null;//游戏说明
     private ImageView start1=null;//起点1
@@ -58,6 +67,50 @@ public class LevelThree extends AppCompatActivity{
         Intent intent = getIntent();
         this.username = (String)intent.getExtras().get("username");
         init();
+
+        Button restart = findViewById(R.id.reset);
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity_change = new Intent(LevelThree.this, LevelThree.class);    //切换 Activityanother至MainActivity
+                Bundle bundle = new Bundle();// 创建Bundle对象
+                bundle.putString("username",username);
+                activity_change.putExtras(bundle);
+                startActivity(activity_change);//  开始跳转
+            }
+        });
+
+        back_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CCDirector director = null;
+
+                CCGLSurfaceView ccglSurfaceView=new CCGLSurfaceView(LevelThree.this);
+                setContentView(ccglSurfaceView);
+
+                director=CCDirector.sharedDirector();
+                director.attachInView(ccglSurfaceView);
+
+                director.setDisplayFPS(true);//显示帧率
+                //设置为横屏显示
+                director.setDeviceOrientation(CCDirector.kCCDeviceOrientationLandscapeLeft);
+                //可以等比例缩放
+                director.setScreenSize(480,320);
+
+
+                //创建一个情景来显示游戏界面
+                CCScene ccScene=CCScene.node();
+                //将Layer层加到场景中
+                try {
+                    ccScene.addChild(new MenuLayer(username,LevelThree.this));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //运行场景
+                director.runWithScene(ccScene);
+            }
+        });
+
         sumbit.setOnClickListener(new View.OnClickListener(){//启动游戏
             @Override
             public void onClick(View view) {
@@ -133,6 +186,7 @@ public class LevelThree extends AppCompatActivity{
 
     //初始化
     private void init(){
+        back_ = findViewById(R.id.back_);
         sumbit=(Button)findViewById(R.id.submit);
         instroduction=(Button)findViewById(R.id.introduction);
         start1=(ImageView)findViewById(R.id.start1);
@@ -243,7 +297,7 @@ public class LevelThree extends AppCompatActivity{
 
     private void initPopWindow(View v, final Player player){
         View view= LayoutInflater.from(LevelThree.this).inflate(R.layout.level3_pop1,null,false);
-        Button back = view.findViewById(R.id.back);
+        Button back  = view.findViewById(R.id.back);
         //指令1,2,3
         Button one = view.findViewById(R.id.ins_one);
         Button two = view.findViewById(R.id.ins_two);
@@ -256,7 +310,7 @@ public class LevelThree extends AppCompatActivity{
         two_text.setText(player.getIns_text(1));
         three_text.setText(player.getIns_text(2));
 
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 1000, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -300,7 +354,7 @@ public class LevelThree extends AppCompatActivity{
         if(player.getIns_text(ins)!= ""){
             ins1.setText(player.getIns_text(ins) + "\n");
         }
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -355,7 +409,7 @@ public class LevelThree extends AppCompatActivity{
         Button A = view.findViewById(R.id.A1);
         Button save = view.findViewById(R.id.save1);
         final TextView choose = view.findViewById(R.id.choose);
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -434,7 +488,7 @@ public class LevelThree extends AppCompatActivity{
         Button save = view.findViewById(R.id.save);
         final CheckBox signal1 = view.findViewById(R.id.signal1);
         final TextView choose = view.findViewById(R.id.choose);
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -445,7 +499,7 @@ public class LevelThree extends AppCompatActivity{
         });
         final String[] signals = {""};
         final String[] signals_text = {"已选择的信号量为："};
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x80808080));
         popupWindow.showAsDropDown(v, 100 - v.getLeft(), -v.getBottom());
         back.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.example.x_plan;
 
 import android.animation.AnimatorSet;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -20,6 +21,12 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.x_plan.layer.MenuLayer;
+
+import org.cocos2d.layers.CCScene;
+import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.opengl.CCGLSurfaceView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,6 +34,9 @@ import java.util.List;
 import java.util.Map;
 
 public class LevelSix extends AppCompatActivity {
+    private String username;
+    private ImageView back_ = null;//返回按钮
+    private boolean is_finish = false;
     private Button begin=null;//启动
     private ImageView start1,start2;//两个起点
     private ImageView end;//终点
@@ -70,7 +80,50 @@ public class LevelSix extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level6);
+        Intent intent = getIntent();
+        this.username = (String)intent.getExtras().get("username");
         init();
+        Button restart = findViewById(R.id.reset);
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity_change = new Intent(LevelSix.this, LevelSix.class);    //切换 Activityanother至MainActivity
+                Bundle bundle = new Bundle();// 创建Bundle对象
+                bundle.putString("username",username);
+                activity_change.putExtras(bundle);
+                startActivity(activity_change);//  开始跳转
+            }
+        });
+        back_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CCDirector director = null;
+
+                CCGLSurfaceView ccglSurfaceView=new CCGLSurfaceView(LevelSix.this);
+                setContentView(ccglSurfaceView);
+
+                director=CCDirector.sharedDirector();
+                director.attachInView(ccglSurfaceView);
+
+                director.setDisplayFPS(true);//显示帧率
+                //设置为横屏显示
+                director.setDeviceOrientation(CCDirector.kCCDeviceOrientationLandscapeLeft);
+                //可以等比例缩放
+                director.setScreenSize(480,320);
+
+
+                //创建一个情景来显示游戏界面
+                CCScene ccScene=CCScene.node();
+                //将Layer层加到场景中
+                try {
+                    ccScene.addChild(new MenuLayer(username,LevelSix.this));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //运行场景
+                director.runWithScene(ccScene);
+            }
+        });
         begin.setOnClickListener(new View.OnClickListener(){//启动游戏
             @Override
             public void onClick(View view) {
@@ -114,6 +167,7 @@ public class LevelSix extends AppCompatActivity {
     private void init(){
         begin=(Button)findViewById(R.id.begin);
 
+        back_ = findViewById(R.id.back_);
         msg=(TextView)findViewById(R.id.msg);
 
         start1=(ImageView) findViewById(R.id.start1);
@@ -216,15 +270,27 @@ public class LevelSix extends AppCompatActivity {
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void run() {
-            if(f.victory(player2.player,end)){//到达终点，胜利
+            if(f.victory(player2.player,end) && is_finish == false){//到达终点，胜利
                 animatorSet[1].end();
                 ifWin=true;
-                // TODO: 2021/6/15 胜利
+                Intent activity_change= new Intent(LevelSix.this, SuccessActivity.class);    //切换 Activity
+                Bundle bundle = new Bundle();// 创建Bundle对象
+                bundle.putInt("data",6 );//  放入data值为int型
+                bundle.putString("username",username);
+                activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
+                startActivity(activity_change);//  开始跳转
+                is_finish = true;
             }
-            if(player2.ifDied){
+            if(player2.ifDied && is_finish == false){
                 animatorSet[0].end();
                 animatorSet[1].end();
-                // TODO: 2021/6/15 失败
+                Intent activity_change= new Intent(LevelSix.this, ErrorActivity.class);    //切换 Activity
+                Bundle bundle = new Bundle();// 创建Bundle对象
+                bundle.putString("username",username);
+                bundle.putInt("data",6);
+                activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
+                startActivity(activity_change);//  开始跳转
+                is_finish = true;
             }
             if (f.FindEnemy_(player2.player, enemies, enemyR)&& count2 < draw2.length) {
                 attackFlag = true;
@@ -415,7 +481,7 @@ public class LevelSix extends AppCompatActivity {
         two_text.setText(player.getIns_text(1));
         three_text.setText(player.getIns_text(2));
 
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 1000, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -424,7 +490,7 @@ public class LevelSix extends AppCompatActivity {
                 return false;
             }
         });
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x80808080));
         popupWindow.showAsDropDown(v, 100 - v.getLeft(), -v.getBottom());
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -467,7 +533,7 @@ public class LevelSix extends AppCompatActivity {
         if(player.getIns_text(ins)!= ""){
             ins1.setText(player.getIns_text(ins) + "\n");
         }
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -476,7 +542,7 @@ public class LevelSix extends AppCompatActivity {
                 return false;
             }
         });
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x80808080));
         popupWindow.showAsDropDown(v, 100 - v.getLeft(), -v.getBottom());
         //返回
         back.setOnClickListener(new View.OnClickListener() {
@@ -555,7 +621,7 @@ public class LevelSix extends AppCompatActivity {
         Button C = view.findViewById(R.id.C);
         Button D = view.findViewById(R.id.D);
         final TextView choose = view.findViewById(R.id.choose);
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -640,7 +706,7 @@ public class LevelSix extends AppCompatActivity {
         Button save = view.findViewById(R.id.save);
         final CheckBox signal1 = view.findViewById(R.id.signal1);
         final TextView choose = view.findViewById(R.id.choose);
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -651,7 +717,7 @@ public class LevelSix extends AppCompatActivity {
         });
         final String[] signals = {""};
         final String[] signals_text = {"已选择的信号量为："};
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x80808080));
         popupWindow.showAsDropDown(v, 100 - v.getLeft(), -v.getBottom());
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -710,7 +776,7 @@ public class LevelSix extends AppCompatActivity {
                 default:break;
             }
         }
-        final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.anim.anim_pop);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -721,7 +787,7 @@ public class LevelSix extends AppCompatActivity {
         });
         final String[] pauses = {""};
         final String[] pauses_text = {"已选择的暂停点为："};
-        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x80808080));
         popupWindow.showAsDropDown(v, 100 - v.getLeft(), -v.getBottom());
         back.setOnClickListener(new View.OnClickListener() {
             @Override
