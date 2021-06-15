@@ -61,9 +61,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="276dp"
-        android:layout_marginLeft="276dp"
-        android:layout_marginBottom="188dp"
+        android:layout_marginStart="297dp"
+        android:layout_marginLeft="297dp"
+        android:layout_marginBottom="185dp"
         android:src="@drawable/biaozhi1" />
 
     <ImageView
@@ -73,8 +73,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="449dp"
-        android:layout_marginLeft="449dp"
+        android:layout_marginStart="479dp"
+        android:layout_marginLeft="479dp"
         android:layout_marginBottom="187dp"
         android:src="@drawable/biaozhi2" />
 
@@ -85,12 +85,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="172dp"
-        android:layout_marginLeft="172dp"
-        android:layout_marginBottom="177dp"
+        android:layout_marginStart="194dp"
+        android:layout_marginLeft="194dp"
+        android:layout_marginBottom="180dp"
         android:src="@drawable/death"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="61dp" />
+
     <ImageView
         android:id="@+id/back_"
         android:layout_width="47dp"
@@ -130,8 +131,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="111dp"
-        android:layout_marginLeft="111dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginLeft="132dp"
         android:layout_marginBottom="184dp"
         android:src="@drawable/role1_hp6" />
 
@@ -142,9 +143,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="591dp"
-        android:layout_marginLeft="591dp"
-        android:layout_marginBottom="181dp"
+        android:layout_marginStart="621dp"
+        android:layout_marginLeft="621dp"
+        android:layout_marginBottom="180dp"
         android:src="@drawable/role1_hp6" />
 
     <ImageView
@@ -154,9 +155,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="359dp"
-        android:layout_marginLeft="359dp"
-        android:layout_marginBottom="184dp"
+        android:layout_marginStart="373dp"
+        android:layout_marginLeft="373dp"
+        android:layout_marginBottom="183dp"
         android:src="@drawable/role3_hp6" />
 
 

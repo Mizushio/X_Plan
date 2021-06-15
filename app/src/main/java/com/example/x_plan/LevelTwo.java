@@ -103,7 +103,6 @@ public class LevelTwo extends AppCompatActivity {
             }
             ImageView enemy = findViewById(R.id.enemy);
             final ImageView[] enemyViews = new ImageView[]{enemy};
-            System.out.println("try"+enemyViews.length);
                 if (is_finish == false && f.FindEnemy(role1, enemyViews, 400) == 0 && countRole1 < draw1.length && attackFlag == false) {
                     role1.setImageDrawable(getResources().getDrawable(draw1[countRole1]));
                     countRole1++;
@@ -172,6 +171,8 @@ public class LevelTwo extends AppCompatActivity {
                     activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
                     startActivity(activity_change);//  开始跳转
                     is_finish = true;
+                    onDestroy();
+
                 }}
 
 
@@ -195,6 +196,7 @@ public class LevelTwo extends AppCompatActivity {
                 Intent activity_change= new Intent(LevelTwo.this, ErrorActivity.class);    //切换 Activity
                 Bundle bundle = new Bundle();// 创建Bundle对象
                 bundle.putString("username",username);
+                bundle.putInt("data",2);
                 activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
                 startActivity(activity_change);//  开始跳转
                 is_finish = true;

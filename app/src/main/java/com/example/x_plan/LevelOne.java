@@ -45,8 +45,9 @@ public class LevelOne extends AppCompatActivity {
     private Func f = new Func();
     private ImageView role1;
     private int hp = 6;
-    private int barrierWidth = 200;
-    private int barrierHeight = 200;
+    private int barrierWidth = 0;
+    private int barrierHeight = 0;
+    private ImageView barrier = null;
     private Handler mHandRole1 = new Handler();
 
     int[] rolePic = { R.drawable.role1_hp6,R.drawable.role1_hp5,R.drawable.role1_hp4,R.drawable.role1_hp3,R.drawable.role1_hp2,R.drawable.role1_hp1,R.drawable.role1_hp0};
@@ -97,10 +98,10 @@ public class LevelOne extends AppCompatActivity {
                 int[] rolePos = new int[2];
                 int[] barrierPos = new int[2];
                 role1.getLocationOnScreen(rolePos);
-                end.getLocationOnScreen(barrierPos);
+                barrier.getLocationOnScreen(barrierPos);
                 if(Math.abs(barrierPos[0] - rolePos[0]) <= barrierWidth && Math.abs(barrierPos[1] - rolePos[1]) <= barrierHeight && hp >= 0){
-//                    hp = 0;
-//                    role1.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                    hp = 0;
+                    role1.setImageDrawable(getResources().getDrawable(rolePic[hp]));
                 }
             }
             //当hp为0时，停止运行
@@ -108,6 +109,7 @@ public class LevelOne extends AppCompatActivity {
                 Intent activity_change= new Intent(LevelOne.this, ErrorActivity.class);    //切换 Activity
                 Bundle bundle = new Bundle();// 创建Bundle对象
                 bundle.putString("username",username);
+                bundle.putInt("data",1);
                 activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
                 startActivity(activity_change);//  开始跳转
                 is_finish = true;
@@ -139,6 +141,9 @@ public class LevelOne extends AppCompatActivity {
         a = findViewById(R.id.A);
         b = findViewById(R.id.B);
         end = findViewById(R.id.end);
+        barrier = findViewById(R.id.barrier);
+
+
     }
 
     @Override
@@ -151,6 +156,7 @@ public class LevelOne extends AppCompatActivity {
 
         //初始化
         init();
+
         //启动玩家1的线程
         mHandRole1.post(mRunRole);
 
@@ -409,6 +415,15 @@ public class LevelOne extends AppCompatActivity {
         //将线程销毁掉
         mHandRole1.removeCallbacks(mRunRole);
         super.onDestroy();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        barrierHeight=barrier.getHeight();
+        barrierWidth=barrier.getWidth();
+        System.out.println("test"+barrierHeight);
+        System.out.println("test22"+barrierWidth);
     }
 
 }

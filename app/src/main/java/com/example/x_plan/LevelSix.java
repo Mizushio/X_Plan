@@ -57,10 +57,10 @@ public class LevelSix extends AppCompatActivity {
     private boolean flag=false;
     private boolean ifBossDied=false;
     //攻击半径
-    private int player1R=300;
-    private int player2R=400;
-    private int enemyR=200;
-    private int bossR=400;
+    private int player1R=450;
+    private int player2R=600;
+    private int enemyR=300;
+    private int bossR=500;
 
 
     private int time=15;
@@ -261,7 +261,7 @@ public class LevelSix extends AppCompatActivity {
                 player1.setSignal(true, 0);
             }
 
-            handler1.postDelayed(player1Runnable, 300);
+            handler1.postDelayed(player1Runnable, 200);
         }
     };
 
@@ -295,7 +295,7 @@ public class LevelSix extends AppCompatActivity {
             if (f.FindEnemy_(player2.player, enemies, enemyR)&& count2 < draw2.length) {
                 attackFlag = true;
                 player2.player.setImageDrawable(getResources().getDrawable(draw2[(int)count2]));
-                count2=count2+0.4;
+                count2=count2+0.3;
             } else {
                 attackFlag = false;
             }
@@ -303,12 +303,12 @@ public class LevelSix extends AppCompatActivity {
             if ((f.FindEnemy_(player2.player, boss, bossR)||f.FindEnemy_(player2.player, blocks, 0)) && count2 < draw2.length) {
                 attackFlag = true;
                 player2.player.setImageDrawable(getResources().getDrawable(draw2[(int)count2]));
-                count2=count2+0.8;
+                count2=count2+0.6;
             } else {
                 attackFlag = false;
             }
             if (count2 >= draw2.length) {
-                animatorSet[1].end();
+                animatorSet[1].pause();
                 player2.ifDied = true;
             }
 
@@ -328,7 +328,7 @@ public class LevelSix extends AppCompatActivity {
             }
 
             if(player2.ifDied||ifWin){
-                animatorSet[1].end();
+                animatorSet[1].pause();
             }
             else {
                 if(!flag){
@@ -339,7 +339,7 @@ public class LevelSix extends AppCompatActivity {
                 }
 
             }
-            handler2.postDelayed(player2Runnable, 300);
+            handler2.postDelayed(player2Runnable, 200);
         }
     };
 
@@ -389,7 +389,7 @@ public class LevelSix extends AppCompatActivity {
                     if (i != -1) {
                         if (bossCount < draw4.length) {
                             boss[i].setImageDrawable(getResources().getDrawable(draw4[(int) bossCount]));
-                            bossCount = bossCount + 1;
+                            bossCount = bossCount + 0.8;
                         } else {
                             ifBossDied = true;
                             ViewGroup parent = (ViewGroup) boss[i].getParent();

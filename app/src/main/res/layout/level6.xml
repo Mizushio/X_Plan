@@ -9,7 +9,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/exit"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="260dp"
         android:layout_alignParentRight="true"
         android:id="@+id/end"/>
     <ImageView
@@ -24,7 +24,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/position_1"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         android:layout_marginLeft="260dp"
         android:id="@+id/A" />
     <ImageView
@@ -39,21 +39,21 @@
         android:layout_height="45dp"
         android:src="@drawable/position_3"
         android:layout_marginTop="220dp"
-        android:layout_marginLeft="420dp"
+        android:layout_marginLeft="500dp"
         android:id="@+id/C" />
     <ImageView
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/position_4"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="420dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="500dp"
         android:id="@+id/D" />
 
     <ImageView
         android:id="@+id/enemy1"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="400dp"
         android:layout_marginTop="150dp"
         android:src="@drawable/zombiehp5" />
     <ImageView
@@ -67,7 +67,7 @@
         android:id="@+id/enemy3"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginLeft="320dp"
+        android:layout_marginLeft="350dp"
         android:layout_marginTop="180dp"
         android:src="@drawable/zombiehp5" />
 
@@ -167,7 +167,7 @@
         android:id="@+id/boss"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="590dp"
+        android:layout_marginLeft="630dp"
         android:layout_marginTop="165dp"
         android:src="@drawable/deathhp5" />
 
