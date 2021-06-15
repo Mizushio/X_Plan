@@ -39,10 +39,11 @@ public class LevelThree extends AppCompatActivity{
     private View[] towers=null;//塔楼集合
     private Handler handler1=new Handler();
     private Handler handler2=new Handler();
-    private int count1=0,count2=0;
+    private double count1=0,count2=0;
     private boolean attackFlag = false;
     private boolean ifWin=false;
     private boolean is_finish = false;
+    private boolean flag=false;
 
     final AnimatorSet[] animatorSet = new AnimatorSet[2];
     Func f = new Func();
@@ -65,7 +66,7 @@ public class LevelThree extends AppCompatActivity{
                 player2.player.setEnabled(false);
                 cal();//解析命令数组
                 animatorSet[0] = f.Move_(player1.player,player1.views,200);
-                animatorSet[1] = f.Move_(player2.player, player2.views, 200);
+                animatorSet[1] = f.Move_(player2.player, player2.views, 250);
                 handler2.post(player2Runnable);
                 handler1.post(player1Runnable);
             }
@@ -146,10 +147,6 @@ public class LevelThree extends AppCompatActivity{
         player2.views.add(start2);
         player2.views.add(position1);
         player2.views.add(end);
-//        for(int i=0;i<5;i++){
-//            player1.time.add((long) 5000);
-//            player2.time.add((long) 5000);
-//        }
         tower1=(ImageView) findViewById(R.id.tower1);
         towers = new View[]{tower1};
         player1.player.setOnClickListener(new View.OnClickListener(){
@@ -171,17 +168,17 @@ public class LevelThree extends AppCompatActivity{
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void run() {
-            if (f.FindEnemy_(player1.player, towers, 325)) {
+            if (f.FindEnemy_(player1.player, towers, 400)) {
                 player1.setSignal(true, 0);
             }
-            if (f.FindEnemy_(player1.player, towers, 100) && count1 < draw1.length && !attackFlag) {
+            if (f.FindEnemy_(player1.player, towers, 200) && count1 < draw1.length && !attackFlag) {
                 attackFlag = true;
-                player1.player.setImageDrawable(getResources().getDrawable(draw1[count1]));
-                count1++;
+                player1.player.setImageDrawable(getResources().getDrawable(draw1[(int)count1]));
+                count1+=0.5;
             } else {
                 attackFlag = false;
             }
-            if (count1 == draw1.length) {
+            if (count1 >= draw1.length) {
                 animatorSet[0].end();
                 player1.ifDied = true;
             }
@@ -216,23 +213,29 @@ public class LevelThree extends AppCompatActivity{
                 is_finish = true;
             }
 
-            if (f.FindEnemy_(player2.player, towers, 100) && count2 < draw2.length && !attackFlag) {
+            if (f.FindEnemy_(player2.player, towers, 200) && count2 < draw2.length && !attackFlag) {
                 attackFlag = true;
-                player2.player.setImageDrawable(getResources().getDrawable(draw2[count2]));
-                count2++;
+                player2.player.setImageDrawable(getResources().getDrawable(draw2[(int)count2]));
+                count2+=1;
             } else {
                 attackFlag = false;
             }
-            if (count2 == draw2.length) {
+            if (count2 >= draw2.length) {
                 animatorSet[1].pause();
                 player2.ifDied = true;
             }
-            if ((!player2.getIfSignal() || !player2.getIfSignal())&&!player2.ifDied&&!ifWin) {
-                animatorSet[1].start();
-            } else if (player1.getSignal(0) && player2.getIfSignal()&&!player2.ifDied&&!ifWin) {
-                animatorSet[1].start();
-            } else animatorSet[1].pause();
 
+            if(player2.ifDied||ifWin){
+                animatorSet[1].pause();
+            }
+            else {
+                if(!flag){
+                    if ((player1.getSignal(0) && player2.getIfSignal())||(!player2.getIfSignal() || !player2.getIfSignal())) {
+                        animatorSet[1].resume();
+                        flag=true;
+                    } else animatorSet[1].pause();
+                }
+            }
             handler2.postDelayed(player2Runnable, 200);
         }
 
@@ -393,7 +396,7 @@ public class LevelThree extends AppCompatActivity{
                 map.put("0",path[0]);
                 player.setInstructions(map,ins);
                 popupWindow.dismiss();
-                initPopWindow2(v,ins,player);
+                initPopWindow(v,player);
             }
         });
     }
@@ -474,7 +477,7 @@ public class LevelThree extends AppCompatActivity{
                 map.put("1",signals[0]);
                 player.setInstructions(map,ins);
                 popupWindow.dismiss();
-                initPopWindow2(v,ins,player);
+                initPopWindow(v,player);
             }
         });
     }
