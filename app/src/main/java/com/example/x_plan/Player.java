@@ -14,6 +14,7 @@ public class Player {
     private Map<String,String>[] instructions=new Map[3];
     private String[] ins_text={"","",""};
     public List<View> views=new ArrayList<>();
+    public List<View> pauseViews=new ArrayList<>();
     public boolean ifDied=false;
 //    public List<Long> time=new ArrayList<>();
 
