@@ -104,7 +104,11 @@ public class WelcomeLayer extends CCLayer {
     public boolean ccTouchesBegan(MotionEvent event){
         CGPoint convertTouchNodeSpace=convertTouchToNodeSpace(event);
         if(CGRect.containsPoint(start.getBoundingBox(),convertTouchNodeSpace)){
-            CommonUtils.changeLayer(new MenuLayer(username,context));
+            try {
+                CommonUtils.changeLayer(new MenuLayer(username,context));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
          else if (CGRect.containsPoint(help.getBoundingBox(),convertTouchNodeSpace)){
             Intent intent = new Intent(context, HelpActivity.class);

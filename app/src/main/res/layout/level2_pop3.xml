@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:text="请选择路径点顺序"
         android:textSize="30dp" />
+
     <TextView
         android:id="@+id/choose"
         android:layout_width="match_parent"
@@ -23,6 +24,10 @@
         android:textSize="20dp"
         android:text=""/>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <Button
         android:id="@+id/A1"
         android:layout_width="wrap_content"
@@ -33,6 +38,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2" />
+
+        <Button
+        android:id="@+id/C1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3" />
+
+        <Button
+            android:id="@+id/D1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/save1"
         android:layout_width="wrap_content"

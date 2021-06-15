@@ -8,8 +8,8 @@
     <ImageView
         android:layout_width="424dp"
         android:layout_height="251dp"
-        android:src="@drawable/success"
-        android:layout_marginLeft="140dp"/>
+        android:layout_marginLeft="140dp"
+        android:src="@drawable/error" />
 
     <Button
         android:id="@+id/return_"
@@ -23,13 +23,13 @@
         android:textSize="20dp" />
 
     <Button
-        android:id="@+id/next_"
+        android:id="@+id/again"
         android:layout_width="169dp"
         android:layout_height="78dp"
         android:layout_marginLeft="380dp"
         android:layout_marginTop="320dp"
         android:background="@drawable/button"
-        android:text="下一关"
+        android:text="重新开始"
         android:textColor="#336666"
         android:textSize="20dp" />
 

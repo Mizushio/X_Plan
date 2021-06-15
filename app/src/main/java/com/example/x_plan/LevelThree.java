@@ -1,6 +1,7 @@
 package com.example.x_plan;
 
 import android.animation.AnimatorSet;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -24,6 +25,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class LevelThree extends AppCompatActivity{
+
+    private String username;
     private Button sumbit=null;//确定
     private Button instroduction=null;//游戏说明
     private TextView start1=null;//起点1
@@ -39,6 +42,8 @@ public class LevelThree extends AppCompatActivity{
     private int count1=0,count2=0;
     private boolean attackFlag = false;
     private boolean ifWin=false;
+    private boolean is_finish = false;
+
     final AnimatorSet[] animatorSet = new AnimatorSet[2];
     Func f = new Func();
 
@@ -49,6 +54,8 @@ public class LevelThree extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level3);
+        Intent intent = getIntent();
+        this.username = (String)intent.getExtras().get("username");
         init();
         sumbit.setOnClickListener(new View.OnClickListener(){//启动游戏
             @Override
@@ -58,7 +65,7 @@ public class LevelThree extends AppCompatActivity{
                 player2.player.setEnabled(false);
                 cal();//解析命令数组
                 animatorSet[0] = f.Move_(player1.player,player1.views,200);
-                animatorSet[1] = f.Move_(player2.player, player2.views, 250);
+                animatorSet[1] = f.Move_(player2.player, player2.views, 200);
                 handler2.post(player2Runnable);
                 handler1.post(player1Runnable);
             }
@@ -164,7 +171,7 @@ public class LevelThree extends AppCompatActivity{
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void run() {
-            if (f.FindEnemy_(player1.player, towers, 625)) {
+            if (f.FindEnemy_(player1.player, towers, 325)) {
                 player1.setSignal(true, 0);
             }
             if (f.FindEnemy_(player1.player, towers, 100) && count1 < draw1.length && !attackFlag) {
@@ -187,11 +194,27 @@ public class LevelThree extends AppCompatActivity{
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void run() {
-            if(f.victory(player2.player,end)){//到达终点，胜利
+            if(f.victory(player2.player,end) && is_finish == false){//到达终点，胜利
                 animatorSet[1].end();
                 ifWin=true;
-                // TODO: 2021/6/14 此处跳转胜利activity
+                Intent activity_change= new Intent(LevelThree.this, SuccessActivity.class);    //切换 Activity
+                Bundle bundle = new Bundle();// 创建Bundle对象
+                bundle.putInt("data",3 );//  放入data值为int型
+                bundle.putString("username",username);
+                activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
+                startActivity(activity_change);//  开始跳转
+                is_finish = true;
             }
+
+            if(player2.ifDied == true && is_finish==false){
+                Intent activity_change= new Intent(LevelThree.this, ErrorActivity.class);    //切换 Activity
+                Bundle bundle = new Bundle();// 创建Bundle对象
+                bundle.putString("username",username);
+                activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
+                startActivity(activity_change);//  开始跳转
+                is_finish = true;
+            }
+
             if (f.FindEnemy_(player2.player, towers, 100) && count2 < draw2.length && !attackFlag) {
                 attackFlag = true;
                 player2.player.setImageDrawable(getResources().getDrawable(draw2[count2]));

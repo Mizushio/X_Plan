@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -26,7 +25,7 @@ import java.util.Map;
 
 public class LevelTwo extends AppCompatActivity {
 
-//    private final static String TAG = "UOfly Android Thread ==>";
+    private String username;
     private Player player1 = new Player();
     private Player player2 = new Player();
     private Func f = new Func();
@@ -38,21 +37,30 @@ public class LevelTwo extends AppCompatActivity {
     private boolean is_run = false;
     private Handler mHandler = new Handler();
     private Handler mHandler_ = new Handler();
+    private Handler runHandler = new Handler();
     private int countRole1 = 0;
     private int countRole2 = 0;
-    private Button a = null;
-    private Button b = null;
-    private TextView start1 = null;
-    private TextView start2 = null;
+    private ImageView a = null;
+    private ImageView b = null;
+    private ImageView c = null;
+    private ImageView d = null;
+    private ImageView notGo = null;
+    private Button run = null;
+    private Boolean is_dead1 = false;
+    private Boolean is_dead2 = false;
+
+    private Boolean can_run = false;
+    private ImageView start1 = null;
+    private ImageView start2 = null;
     private ImageView end=null;
     private ImageView role1 = null;
     private ImageView role2 = null;
-    private boolean is_Pop1 = false;
-    private boolean is_Pop2 = false;
+
+    private boolean is_finish = false;
     final AnimatorSet[] animatorSet = new AnimatorSet[2];
 
     int[] draw1 = { R.drawable.role1_hp6,R.drawable.role1_hp5,R.drawable.role1_hp4,R.drawable.role1_hp3,R.drawable.role1_hp2,R.drawable.role1_hp1,R.drawable.role1_hp0};
-    int[] draw2 = { R.drawable.role2_hp6,R.drawable.role2_hp5,R.drawable.role1_hp4,R.drawable.role2_hp3,R.drawable.role2_hp2,R.drawable.role1_hp1,R.drawable.role2_hp0};
+    int[] draw2 = { R.drawable.role2_hp5,R.drawable.role2_hp4,R.drawable.role2_hp3,R.drawable.role2_hp2,R.drawable.role2_hp1,R.drawable.role2_hp0};
 
     //玩家1的线程
     private Runnable mRunnable = new Runnable() {
@@ -62,32 +70,42 @@ public class LevelTwo extends AppCompatActivity {
             role1.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    if(is_Pop1 == false) {
+                    if(is_run == false) {
                         initPopWindow(v, player1);
-                        is_Pop1 = true;
+
                     }
                 }
             });
-            cal();
+
+            final ImageView[] notGoViews = new ImageView[]{notGo};
+            if(is_run == true && f.FindEnemy(role1,notGoViews,100) == 0)
+
+           {     System.out.println("haha");
+                countRole1=draw1.length - 1;
+                role1.setImageDrawable(getResources().getDrawable(draw1[countRole1]));
+                countRole1++;
+            }
 
             if(is_run == true && role1_run == false){
+                cal();
 
                 Func f = new Func();
-                animatorSet[0] = f.Move_(player1.player,player1.views,150);
+                animatorSet[0] = f.Move_(player1.player,player1.views,120);
                 role1_run = true;
             }
             ImageView enemy = findViewById(R.id.enemy);
             final ImageView[] enemyViews = new ImageView[]{enemy};
-            if(f.FindEnemy(role1,enemyViews,383) == 0 && countRole1<draw1.length && attackFlag==false){
+            if(f.FindEnemy(role1,enemyViews,400) == 0 && countRole1<draw1.length && attackFlag==false){
                 role1.setImageDrawable(getResources().getDrawable(draw1[countRole1]));
                 countRole1++;
                 attackFlag = true;
 
             }else attackFlag = false;
-            if(countRole1 == draw1.length) animatorSet[0].pause();
+            if(countRole1 == draw1.length) {
+                animatorSet[0].pause();
+                is_dead1=true;}
 
-
-            mHandler.postDelayed(mRunnable, 1000);
+            mHandler.postDelayed(mRunnable, 600);
         }
     };
 
@@ -102,40 +120,81 @@ public class LevelTwo extends AppCompatActivity {
             role2.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    if(is_Pop2 == false) {
+                    if(is_run == false) {
                         initPopWindow(v, player2);
-                        is_Pop2 = true;
                     }
                 }
             });
-            cal();
-            if(is_run == true && role2_run == false){
 
+            final ImageView[] notGoViews = new ImageView[]{notGo};
+            if(is_run == true && f.FindEnemy(role2,notGoViews,100) == 0)
+
+            {
+                countRole2=draw2.length - 1;
+                role1.setImageDrawable(getResources().getDrawable(draw2[countRole1]));
+                countRole2++;
+            }
+
+
+            if(is_run == true && role2_run == false){
+                        cal();
                         Func f = new Func();
-                        animatorSet[1] = f.Move_(player2.player,player2.views,150);
+                        animatorSet[1] = f.Move_(player2.player,player2.views,120);
                         role2_run = true;
             }
             ImageView enemy = findViewById(R.id.enemy);
             final ImageView[] enemyViews = new ImageView[]{enemy};
-            if(f.FindEnemy(role2,enemyViews,383) == 0 && countRole2 < draw2.length && attackFlag==false){
+            if(f.FindEnemy(role2,enemyViews,400) == 0 && countRole2 < draw2.length && attackFlag==false){
                 role2.setImageDrawable(getResources().getDrawable(draw2[countRole2]));
                 countRole2++;
                 attackFlag = true;
 
             }else attackFlag = false;
-            if(countRole2 == draw2.length) animatorSet[1].pause();
-            System.out.println("什么情况"+f.victory(role2,end));
+            if(countRole2 == draw2.length) {
+                animatorSet[1].pause();
+                is_dead2= true;}
 
-            if(f.victory(role2,end)) {
-                Intent activity_change= new Intent(LevelTwo.this, SuccessActivity.class);    //切换 Activityanother至MainActivity
+            if(is_run == true){
+                if(f.victory(role2,end) && is_finish==false) {
+                    Intent activity_change= new Intent(LevelTwo.this, SuccessActivity.class);    //切换 Activity
+                    Bundle bundle = new Bundle();// 创建Bundle对象
+                    bundle.putInt("data",2 );//  放入data值为int型
+                    bundle.putString("username",username);
+                    activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
+                    startActivity(activity_change);//  开始跳转
+                    is_finish = true;
+                }}
+
+
+
+                mHandler.postDelayed(mRunnable_, 600);
+        }
+    };
+
+    private Runnable runRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if(can_run == true) {
+                run.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        is_run = true;
+                    }
+                });
+            }
+            if(is_dead2 == true && is_finish==false) {
+                Intent activity_change= new Intent(LevelTwo.this, ErrorActivity.class);    //切换 Activity
                 Bundle bundle = new Bundle();// 创建Bundle对象
-                bundle.putInt("data",2 );//  放入data值为int型
-
+                bundle.putString("username",username);
                 activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
                 startActivity(activity_change);//  开始跳转
+                is_finish = true;
+
             }
 
-                mHandler.postDelayed(mRunnable_, 1000);
+
+            mHandler.postDelayed(runRunnable, 100);
+
         }
     };
 
@@ -146,7 +205,6 @@ public class LevelTwo extends AppCompatActivity {
                 Iterator it = player1.getInstructions(i).entrySet().iterator();
                 while (it.hasNext()) {
                     java.util.Map.Entry entry = (java.util.Map.Entry) it.next();
-
                     if(entry.getKey().equals("0")){//路径选择
                         for(int j=player1.views.size()-1;j>0;j--){
                             player1.views.remove(j);
@@ -157,6 +215,10 @@ public class LevelTwo extends AppCompatActivity {
                             }
                             else if(((entry.getValue().toString()).charAt(j))=='2'){
                                 player1.views.add(b);
+                            }else if(((entry.getValue().toString()).charAt(j))=='3'){
+                                player1.views.add(c);
+                            }else if(((entry.getValue().toString()).charAt(j))=='4'){
+                                player1.views.add(d);
                             }
 //                            player1.time.add((long) 5000);
                         }
@@ -168,7 +230,6 @@ public class LevelTwo extends AppCompatActivity {
                 Iterator it = player2.getInstructions(i).entrySet().iterator();
                 while (it.hasNext()) {
                     java.util.Map.Entry entry = (java.util.Map.Entry) it.next();
-
                     if(entry.getKey().equals("0")){
                         for(int j=player2.views.size()-1;j>0;j--){
                             player2.views.remove(j);
@@ -179,6 +240,10 @@ public class LevelTwo extends AppCompatActivity {
                             }
                             else if(((entry.getValue().toString()).charAt(j-1))=='2'){
                                 player2.views.add(b);
+                            }else if(((entry.getValue().toString()).charAt(j-1))=='3'){
+                                player2.views.add(c);
+                            }else if(((entry.getValue().toString()).charAt(j-1))=='4'){
+                                player2.views.add(d);
                             }
 //                            player2.time.add((long) 5000);
                         }
@@ -293,6 +358,9 @@ public class LevelTwo extends AppCompatActivity {
         Button back = view.findViewById(R.id.back);
         Button A = view.findViewById(R.id.A1);
         Button B = view.findViewById(R.id.B1);
+        Button C = view.findViewById(R.id.C1);
+        Button D = view.findViewById(R.id.D1);
+
         Button save = view.findViewById(R.id.save1);
         final TextView choose = view.findViewById(R.id.choose);
         final PopupWindow popupWindow = new PopupWindow(view, 1600, 900, true);
@@ -338,9 +406,32 @@ public class LevelTwo extends AppCompatActivity {
                 }
             }
         });
+        C.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(now[0] != "3"){
+                    path_text[0]+="3->";
+                    path[0] += "3";
+                    now[0]="3";
+                    choose.setText(path_text[0]);
+                }
+            }
+        });
+        D.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(now[0] != "4"){
+                    path_text[0]+="4->";
+                    path[0] += "4";
+                    now[0]="4";
+                    choose.setText(path_text[0]);
+                }
+            }
+        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                can_run = true;
                 path_text[0]+="end";
                 player.setIns_text(path_text[0],ins);
                 Map<String,String> map=new HashMap<>();
@@ -355,25 +446,23 @@ public class LevelTwo extends AppCompatActivity {
     public void init(){
         a = findViewById(R.id.A);
         b = findViewById(R.id.B);
+        c = findViewById(R.id.C);
+        d = findViewById(R.id.D);
         end = findViewById(R.id.end);
         role1 = findViewById(R.id.role1);
         role2 = findViewById(R.id.role2);
         start1 = findViewById(R.id.start1);
         start2 = findViewById(R.id.start2);
+        run =  findViewById(R.id.run);
+        notGo = findViewById(R.id.notGo);
 
         final ImageView enemy = findViewById(R.id.enemy);
 
 
         player1.player=(ImageView) findViewById(R.id.role1);
         player1.views.add(start1);
-        player1.views.add(a);
-        player1.views.add(b);
-        player1.views.add(end);
         player2.player=(ImageView) findViewById(R.id.role2);
         player2.views.add(start2);
-        player2.views.add(a);
-        player2.views.add(b);
-        player2.views.add(end);
     }
 
 
@@ -388,21 +477,14 @@ public class LevelTwo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.level2);
 
+        Intent intent = getIntent();
+        this.username = (String)intent.getExtras().get("username");
 
         init();
-
         // 通过Handler启动线程
         mHandler.post(mRunnable);  //玩家1
         mHandler_.post(mRunnable_); //玩家2
-
-        Button run = findViewById(R.id.run);
-        run.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                is_run = true;
-            }
-        });
-
+        runHandler.post(runRunnable);
 
     }
 
