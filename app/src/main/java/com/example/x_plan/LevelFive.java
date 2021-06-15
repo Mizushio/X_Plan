@@ -83,7 +83,7 @@ public class LevelFive extends AppCompatActivity {
     private Handler mHandRole2 = new Handler();
     private Handler mHandRole3 = new Handler();
 
-    int[] rolePic = { R.drawable.deathhp5,R.drawable.deathhp4,R.drawable.deathhp3,R.drawable.deathhp2,R.drawable.deathhp1,R.drawable.deathhp0};
+    int[] rolePic = { R.drawable.deathhp0,R.drawable.deathhp1,R.drawable.deathhp2,R.drawable.deathhp3,R.drawable.deathhp4,R.drawable.deathhp5};
 
     //攻击手的线程
     private Runnable mRunRole3 = new Runnable() {
