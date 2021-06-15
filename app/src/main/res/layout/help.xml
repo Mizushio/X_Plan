@@ -10,26 +10,47 @@
     <!--通过TextView来显示，id ： tv_back , tv_main_title -->
 
     <ImageView
+        android:id="@+id/back"
         android:layout_width="47dp"
         android:layout_height="54dp"
-        android:id="@+id/back"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="677dp"
-        android:layout_marginRight="677dp"
-        android:layout_marginBottom="348dp"
+        android:layout_marginEnd="678dp"
+        android:layout_marginRight="678dp"
+        android:layout_marginBottom="349dp"
         android:src="@drawable/back_white" />
 
     <TextView
-        android:layout_width="112dp"
-        android:layout_height="38dp"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="308dp"
-        android:layout_marginRight="308dp"
-        android:layout_marginBottom="345dp"
-        android:text="帮助" />
+        android:layout_marginEnd="304dp"
+        android:layout_marginRight="304dp"
+        android:layout_marginBottom="314dp"
+        android:text="帮助"
+        android:textColor="#F8ED8C"
+        android:textSize="56dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="475dp"
+        android:layout_height="247dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="132dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginRight="124dp"
+        android:layout_marginBottom="52dp"
+        android:text="这是一个由我们自主开发安卓小游戏、\n在游戏中你需要使用不同的策略、\n控制你的角色们完成关卡的目标、\n如果失败了也不要灰心，请多尝试几次！"
+        android:textColor="#FFEB3B" />
 
 </RelativeLayout>
