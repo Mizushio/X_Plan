@@ -32,12 +32,14 @@ public class LevelOne extends AppCompatActivity {
     private ImageView a;
     private ImageView b;
     private ImageView end;
+    private Button barrier;
     private AnimatorSet animatorSet = null;  //属性动画集合
     private Func f = new Func();
     private ImageView role1;
     private int hp = 6;
-    private int barrierWidth = 200;
-    private int barrierHeight = 200;
+    private int barrierWidth = 500;     //障碍物的长宽
+    private int barrierHeight = 100;
+    private int speed = 300;     //移动速度
     private Handler mHandRole1 = new Handler();
 
     int[] rolePic = { R.drawable.hp0,R.drawable.hp1,R.drawable.hp2,R.drawable.hp3,R.drawable.hp4,R.drawable.hp5,R.drawable.hp6};
@@ -51,7 +53,9 @@ public class LevelOne extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(isRun == 0){
-                        initPopWindow(v);
+                        if(isRun == 0){
+                            initPopWindow(v);
+                        }
                     }
                 }
             });
@@ -81,21 +85,22 @@ public class LevelOne extends AppCompatActivity {
                     }
                     time[i] = 3000;
                 }
-                animatorSet = f.Move(role1, views, time);
+                animatorSet = f.Move(role1, views, speed);
             }
             //判断是否接触到障碍物
             if(isRun == 2){
                 int[] rolePos = new int[2];
                 int[] barrierPos = new int[2];
                 role1.getLocationOnScreen(rolePos);
-                end.getLocationOnScreen(barrierPos);
+                barrier.getLocationOnScreen(barrierPos);
                 if(Math.abs(barrierPos[0] - rolePos[0]) <= barrierWidth && Math.abs(barrierPos[1] - rolePos[1]) <= barrierHeight && hp >= 0){
-//                    hp = 0;
-//                    role1.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                    hp = 0;
+                    role1.setImageDrawable(getResources().getDrawable(rolePic[hp]));
                 }
             }
             //当hp为0时，停止运行
             if(hp == 0){
+
                 animatorSet.pause();
             }
             if(isRun == 2 && f.victory(role1, end)){
@@ -148,6 +153,7 @@ public class LevelOne extends AppCompatActivity {
         a = findViewById(R.id.A);
         b = findViewById(R.id.B);
         end = findViewById(R.id.end);
+        barrier = findViewById(R.id.barrier);
     }
 
     @Override

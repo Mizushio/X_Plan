@@ -45,8 +45,10 @@ public class LevelFive extends AppCompatActivity {
     private int judge2 = 0;
     private int count1 = 0;    //记录移动的次数
     private int count2 = 0;
-    private int runType = 0;   //哪一个条指令移动的标志
-    private double roleAttack = 400;   //人物的攻击距离
+    private int runType = 0, runType1 = 0;   //哪一个条指令移动的标志
+    private double roleAttack = 350;   //人物的攻击距离
+    private int speed = 150;   //攻击手的移动速度
+    private int enemySpeed = 300, enemyTimes = 100;  //敌人移动速度和重复次数
     //侦查手参数
     private String inves1 = "", inves11 = "", inves12 = "", inves13 = "", inves14 = "", inves15 = "";
     private String inves2 = "", inves21 = "", inves22 = "", inves23 = "", inves24 = "", inves25 = "";
@@ -82,7 +84,9 @@ public class LevelFive extends AppCompatActivity {
             role3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    initPopAtack(v);
+                    if(isRun == 0){
+                        initPopAtack(v);
+                    }
                 }
             });
             //判断是否开始运行画面
@@ -90,7 +94,7 @@ public class LevelFive extends AppCompatActivity {
                 isRun = 2;
                 //启动敌人移动
                 long[] time = {3000,3000,3000,3000};
-                animatorSet[2] = f.Move(enemy, points, time, 10);
+                animatorSet[2] = f.Move(enemy, points, enemySpeed, enemyTimes);
                 //获取指令1的移动指令
                 if (MoveChoose1[0] != 0) {
                     int count1 = 0;
@@ -111,7 +115,7 @@ public class LevelFive extends AppCompatActivity {
                         }
                         time1[i] = 3000;
                     }
-                    animatorSet[0] = f.Move(role3, views, time1, 100);
+                    animatorSet[0] = f.Move(role3, views, speed);
                     animatorSet[0].cancel();
                 }
                 //获取指令2的移动数组
@@ -134,12 +138,12 @@ public class LevelFive extends AppCompatActivity {
                         }
                         time1[i] = 3000;
                     }
-                    animatorSet[1] = f.Move(role3, views, time1, 100);
+                    animatorSet[1] = f.Move(role3, views, speed);
                     animatorSet[1].cancel();
                 }
             }
             if (isRun == 2) {
-                //指令1的信号量是否选择
+                //指令1是否有前提条件
                 if (signalChoose1 != -1) {
                     //信号量是否正确
                     if (signalArr[signalChoose1] == signalVal1) {
@@ -160,14 +164,11 @@ public class LevelFive extends AppCompatActivity {
                             }
                         }
                     }
-                }
-                //指令2的信号量是否选择
-                else if(signalChoose2 != -1){
-                    //信号是否正确
-                    if(signalArr[signalChoose2] == signalVal2){
+                    //指令一不满足条件，执行指令2
+                    else{
                         //是否有移动
-                        if(MoveChoose2[0] != 0 && runType != 2){
-                            runType = 2;
+                        if (MoveChoose2[0] != 0 && runType1 == 0) {
+                            runType1 = 2;
                             animatorSet[1].start();
                             if(animatorSet[0] != null){
                                 animatorSet[0].cancel();
@@ -175,6 +176,7 @@ public class LevelFive extends AppCompatActivity {
                         }
                         //是否有攻击
                         if (attack2 == 1) {
+                            ImageView[] fEnemy = {enemy};
                             if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
                                 hp -= 2;
                                 enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
@@ -182,34 +184,65 @@ public class LevelFive extends AppCompatActivity {
                         }
                     }
                 }
-                //没有信号量选择
+                //指令一没有条件
                 else{
-                    //是否有移动
-                    if (MoveChoose1[0] != 0) {
-                        animatorSet[0].start();
-                        if(animatorSet[1] != null){
-                            animatorSet[1].cancel();
+                    //指令1是否有操作
+                    if(MoveChoose1[0] != 0 || attack1 != 0){
+                        //是否有移动
+                        if (MoveChoose1[0] != 0 && runType1 == 0) {
+                            runType1 = 1;
+                            animatorSet[0].start();
+                            if(animatorSet[1] != null){
+                                animatorSet[1].cancel();
+                            }
+                        }
+                        //是否有攻击
+                        if (attack1 == 1) {
+                            ImageView[] fEnemy = {enemy};
+                            if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
+                                hp -= 2;
+                                enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                            }
                         }
                     }
-                    else if (MoveChoose2[0] != 0) {
-                        animatorSet[1].start();
-                        if(animatorSet[0] != null){
-                            animatorSet[0].cancel();
+                    //指令1没有操作，执行指令2
+                    else if(signalChoose2 != -1){
+                        //信号是否正确
+                        if(signalArr[signalChoose2] == signalVal2){
+                            //是否有移动
+                            if(MoveChoose2[0] != 0 && runType != 2){
+                                runType = 2;
+                                animatorSet[1].start();
+                                if(animatorSet[0] != null){
+                                    animatorSet[0].cancel();
+                                }
+                            }
+                            //是否有攻击
+                            if (attack2 == 1) {
+                                if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
+                                    hp -= 2;
+                                    enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                                }
+                            }
                         }
                     }
-                    //是否有攻击
-                    if (attack1 == 1) {
-                        ImageView[] fEnemy = {enemy};
-                        if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
-                            hp -= 2;
-                            enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                    //指令2没有条件
+                    else{
+                        //是否有移动
+                        if (MoveChoose2[0] != 0 && runType1 == 0) {
+                            runType1 = 2;
+                            animatorSet[1].start();
+                            if(animatorSet[0] != null){
+                                animatorSet[0].cancel();
+                            }
                         }
-                    }
-                    else if (attack2 == 1) {
-                        ImageView[] fEnemy = {enemy};
-                        if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
-                            hp -= 2;
-                            enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                        //是否有攻击
+                        if (attack2 == 1) {
+                            ImageView[] fEnemy = {enemy};
+                            if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
+                                hp -= 2;
+                                enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                            }
                         }
                     }
                 }
@@ -218,7 +251,7 @@ public class LevelFive extends AppCompatActivity {
                     animatorSet[2].pause();
                 }
             }
-            // 每0.1秒执行一次
+            // 每1秒执行一次
             mHandRole3.postDelayed(mRunRole3, 1000);
         }
     };
@@ -677,7 +710,9 @@ public class LevelFive extends AppCompatActivity {
             role1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    initPopInves(v, 1);
+                    if(isRun1 == 0){
+                        initPopInves(v, 1);
+                    }
                 }
             });
             //判断是否开始运行画面
@@ -725,7 +760,9 @@ public class LevelFive extends AppCompatActivity {
             role2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    initPopInves(v, 2);
+                    if(isRun2 == 0){
+                        initPopInves(v, 2);
+                    }
                 }
             });
             //判断是否开始运行画面
