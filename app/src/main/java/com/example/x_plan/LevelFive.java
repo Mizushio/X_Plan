@@ -53,7 +53,8 @@ public class LevelFive extends AppCompatActivity {
     private int judge2 = 0;
     private int count1 = 0;    //记录移动的次数
     private int count2 = 0;
-    private int runType = 0， runType1 = 0;   //哪一个条指令移动的标志
+    private int runType = 0;   
+    private int runType1 = 0;  //哪一个条指令移动的标志
     private double roleAttack = 400;   //人物的攻击距离
     private int speed = 150;   //攻击手的移动速度
     private int enemySpeed = 300, enemyTimes = 100;  //敌人移动速度和重复次数
