@@ -53,8 +53,7 @@ public class LevelFive extends AppCompatActivity {
     private int judge2 = 0;
     private int count1 = 0;    //记录移动的次数
     private int count2 = 0;
-    private int runType = 0;
-    private int runType1 = 0;   //哪一个条指令移动的标志
+    private int runType = 0， runType1 = 0;   //哪一个条指令移动的标志
     private double roleAttack = 400;   //人物的攻击距离
     private int speed = 150;   //攻击手的移动速度
     private int enemySpeed = 300, enemyTimes = 100;  //敌人移动速度和重复次数
@@ -156,9 +155,6 @@ public class LevelFive extends AppCompatActivity {
                         if(MoveChoose1[0] != 0 && runType != 1){
                             runType = 1;
                             animatorSet[0].start();
-                            if(animatorSet[1] != null){
-                                animatorSet[1].cancel();
-                            }
                         }
                         //是否有攻击
                         if (attack1 == 1) {
@@ -171,56 +167,30 @@ public class LevelFive extends AppCompatActivity {
                     }
                     //指令一不满足条件，执行指令2
                     else{
-                        //是否有移动
-                        if (MoveChoose2[0] != 0 && runType1 == 0) {
-                            runType1 = 2;
-                            animatorSet[1].start();
-                            if(animatorSet[0] != null){
-                                animatorSet[0].cancel();
+                        //指令2是否有条件
+                        if(signalChoose2 != -1){
+                            //信号是否正确
+                            if(signalArr[signalChoose2] == signalVal2){
+                                //是否有移动
+                                if(MoveChoose2[0] != 0 && runType != 2){
+                                    runType = 2;
+                                    animatorSet[1].start();
+                                }
+                                //是否有攻击
+                                if (attack2 == 1) {
+                                    if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
+                                        hp -= 2;
+                                        enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                                    }
+                                }
                             }
                         }
-                        //是否有攻击
-                        if (attack2 == 1) {
-                            ImageView[] fEnemy = {enemy};
-                            if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
-                                hp -= 2;
-                                enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
-                            }
-                        }
-                    }
-                }
-                //指令一没有条件
-                else{
-                    //指令1是否有操作
-                    if(MoveChoose1[0] != 0 || attack1 != 0){
-                        //是否有移动
-                        if (MoveChoose1[0] != 0 && runType1 == 0) {
-                            runType1 = 1;
-                            animatorSet[0].start();
-                            if(animatorSet[1] != null){
-                                animatorSet[1].cancel();
-                            }
-                        }
-                        //是否有攻击
-                        if (attack1 == 1) {
-                            ImageView[] fEnemy = {enemy};
-                            if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
-                                hp -= 2;
-                                enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
-                            }
-                        }
-                    }
-                    //指令1没有操作，执行指令2
-                    else if(signalChoose2 != -1){
-                        //信号是否正确
-                        if(signalArr[signalChoose2] == signalVal2){
+                        //指令2没有条件，是否有操作
+                        else{
                             //是否有移动
                             if(MoveChoose2[0] != 0 && runType != 2){
                                 runType = 2;
                                 animatorSet[1].start();
-                                if(animatorSet[0] != null){
-                                    animatorSet[0].cancel();
-                                }
                             }
                             //是否有攻击
                             if (attack2 == 1) {
@@ -231,15 +201,49 @@ public class LevelFive extends AppCompatActivity {
                             }
                         }
                     }
-                    //指令2没有条件
+                }
+                //指令一没有条件,是否有操作
+                else{
+                    //指令1是否有操作
+                    if(MoveChoose1[0] != 0 || attack1 != 0){
+                        //是否有移动
+                        if (MoveChoose1[0] != 0 && runType1 == 0) {
+                            runType1 = 1;
+                            animatorSet[0].start();
+                        }
+                        //是否有攻击
+                        if (attack1 == 1) {
+                            ImageView[] fEnemy = {enemy};
+                            if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
+                                hp -= 2;
+                                enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                            }
+                        }
+                    }
+                    //指令1没有操作，执行指令2,指令2是否有条件
+                    else if(signalChoose2 != -1){
+                        //信号是否正确
+                        if(signalArr[signalChoose2] == signalVal2){
+                            //是否有移动
+                            if(MoveChoose2[0] != 0 && runType != 2){
+                                runType = 2;
+                                animatorSet[1].start();
+                            }
+                            //是否有攻击
+                            if (attack2 == 1) {
+                                if (f.FindEnemy(role3, fEnemy, roleAttack) != -1 && hp >= 2) {
+                                    hp -= 2;
+                                    enemy.setImageDrawable(getResources().getDrawable(rolePic[hp]));
+                                }
+                            }
+                        }
+                    }
+                    //指令2没有条件,是否有操作
                     else{
                         //是否有移动
                         if (MoveChoose2[0] != 0 && runType1 == 0) {
                             runType1 = 2;
                             animatorSet[1].start();
-                            if(animatorSet[0] != null){
-                                animatorSet[0].cancel();
-                            }
                         }
                         //是否有攻击
                         if (attack2 == 1) {
@@ -738,25 +742,46 @@ public class LevelFive extends AppCompatActivity {
                             signalArr[signalSet1] = signalSetVal1;   //设置对应信号量的值
                         }
                     }
-                }
-                //指令2是否发现敌人
-                else if(findEnemy12 == 1){
-                    //判断是否发现敌人
-                    if(f.FindEnemy(role1, fEnemy, roleFindRange) != -1){
-                        //是否设置信号量
-                        if(signalSet12 != -1){
-                            signalArr[signalSet12] = signalSetVal3;   //设置对应信号量的值
+                    //不满足条件，执行指令2
+                    else{
+                        //判断指令2是否有条件
+                        if(findEnemy12 == 1){
+                            //判断是否发现敌人
+                            if(f.FindEnemy(role1, fEnemy, roleFindRange) != -1){
+                                //是否设置信号量
+                                if(signalSet12 != -1){
+                                    signalArr[signalSet12] = signalSetVal3;   //设置对应信号量的值
+                                }
+                            }
+                        }
+                        //指令2没有条件,是否有操作
+                        else{
+                            if(signalSet2 != -1){
+                                signalArr[signalSet12] = signalSetVal3;   //设置对应信号量的值
+                            }
                         }
                     }
                 }
-                //没有发现敌人
+                //指令1没有条件，判断是否有操作
                 else{
-                    //是否设置信号量
                     if(signalSet1 != -1){
                         signalArr[signalSet1] = signalSetVal1;   //设置对应信号量的值
                     }
-                    else if(signalSet2 != -1){
-                        signalArr[signalSet12] = signalSetVal3;   //设置对应信号量的值
+                    //指令1没有操作，指令2是否有条件
+                    else if(findEnemy12 == 1){
+                        //判断是否发现敌人
+                        if(f.FindEnemy(role1, fEnemy, roleFindRange) != -1){
+                            //是否设置信号量
+                            if(signalSet12 != -1){
+                                signalArr[signalSet12] = signalSetVal3;   //设置对应信号量的值
+                            }
+                        }
+                    }
+                    //指令2没有条件,是否有操作
+                    else{
+                        if(signalSet2 != -1){
+                            signalArr[signalSet12] = signalSetVal3;   //设置对应信号量的值
+                        }
                     }
                 }
             }
@@ -779,7 +804,7 @@ public class LevelFive extends AppCompatActivity {
             });
             //判断是否开始运行画面
             if(isRun2 == 1){
-                //指令1是否设置条件发现敌人
+                //指令1是否有条件
                 if(findEnemy2 == 1){
                     //判断是否发现敌人
                     if(f.FindEnemy(role2, fEnemy, roleFindRange) != -1){
@@ -788,25 +813,50 @@ public class LevelFive extends AppCompatActivity {
                             signalArr[signalSet2] = signalSetVal2;   //设置对应信号量的值
                         }
                     }
-                }
-                //指令2是否发现敌人
-                else if(findEnemy22 == 1){
-                    //判断是否发现敌人
-                    if(f.FindEnemy(role2, fEnemy, roleFindRange) != -1){
-                        //是否设置信号量
-                        if(signalSet22 != -1){
-                            signalArr[signalSet22] = signalSetVal4;   //设置对应信号量的值
+                    //指令1条件不满足，执行指令2
+                    else{
+                        //判断指令2是否有条件
+                        if(findEnemy22 == 1){
+                            //判断是否发现敌人
+                            if(f.FindEnemy(role2, fEnemy, roleFindRange) != -1){
+                                //是否设置信号量
+                                if(signalSet22 != -1){
+                                    signalArr[signalSet22] = signalSetVal4;   //设置对应信号量的值
+                                }
+                            }
+                        }
+                        //指令2没有条件，是否有操作
+                        else{
+                            if(signalSet22 != -1){
+                                signalArr[signalSet22] = signalSetVal4;   //设置对应信号量的值
+                            }
                         }
                     }
                 }
-                //没有发现敌人
+                //指令1没有条件，是否有操作
                 else{
-                    //是否设置信号量
                     if(signalSet2 != -1){
                         signalArr[signalSet2] = signalSetVal2;   //设置对应信号量的值
                     }
-                    else if(signalSet22 != -1){
-                        signalArr[signalSet22] = signalSetVal4;   //设置对应信号量的值
+                    //指令1没有操作，指令2是否发现敌人
+                    else if(findEnemy22 == 1){
+                        //判断是否发现敌人
+                        if(f.FindEnemy(role2, fEnemy, roleFindRange) != -1){
+                            //是否设置信号量
+                            if(signalSet22 != -1){
+                                signalArr[signalSet22] = signalSetVal4;   //设置对应信号量的值
+                            }
+                        }
+                    }
+                    //指令2没有条件，是否有操作
+                    else{
+                        //是否设置信号量
+                        if(signalSet2 != -1){
+                            signalArr[signalSet2] = signalSetVal2;   //设置对应信号量的值
+                        }
+                        else if(signalSet22 != -1){
+                            signalArr[signalSet22] = signalSetVal4;   //设置对应信号量的值
+                        }
                     }
                 }
             }
