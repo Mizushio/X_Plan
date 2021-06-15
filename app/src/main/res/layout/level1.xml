@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/map1" />
 
-    <Button
+    <ImageView
         android:id="@+id/barrier"
         android:layout_width="300dp"
         android:layout_height="80dp"
