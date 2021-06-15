@@ -5,7 +5,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/map1">
 
-
+    <ImageView
+        android:id="@+id/barrier"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="307dp"
+        android:layout_marginRight="307dp"
+        android:layout_marginBottom="201dp" />
     <ImageView
         android:id="@+id/A"
         android:layout_width="45dp"
@@ -17,7 +26,7 @@
         android:layout_marginLeft="417dp"
         android:layout_marginBottom="159dp"
         android:src="@drawable/biaozhi1" />
-
+    
     <ImageView
         android:id="@+id/B"
         android:layout_width="45dp"
