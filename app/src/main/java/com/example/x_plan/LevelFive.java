@@ -20,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.x_plan.layer.MenuLayer;
 
@@ -98,7 +97,7 @@ public class LevelFive extends AppCompatActivity {
                     }
                 }
             });
-            //判断是否开始运行画面
+            //判断是否开始运行画面，并获取指令1、2的移动数组
             if(isRun == 1){
                 isRun = 2;
                 //启动敌人移动
@@ -146,6 +145,7 @@ public class LevelFive extends AppCompatActivity {
                     animatorSet[1].cancel();
                 }
             }
+            //判断指令1、2作用
             if (isRun == 2) {
                 //指令1是否有前提条件
                 if (signalChoose1 != -1) {
