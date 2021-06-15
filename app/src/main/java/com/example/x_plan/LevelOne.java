@@ -418,8 +418,9 @@ public class LevelOne extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
         barrierHeight=barrier.getHeight();
         barrierWidth=barrier.getWidth();
-        System.out.println("test"+barrierHeight);
-        System.out.println("test22"+barrierWidth);
+        System.out.println("hha"+barrierHeight);
+        System.out.println("hahah"+barrierWidth);
+
     }
 
 }

@@ -63,7 +63,6 @@ public class SignActivity extends AppCompatActivity {
                                 String utf8Username= URLDecoder.decode(usernameText,"UTF-8");
                                 String pamm="{\"username\":\""+utf8Username+"\",\"password\":\""+passwordText+"\"}";
                                 String result=(HttpUtils.sendPost("http://mizushio.top:8080/AppLogin",pamm));
-                                System.out.println("登陆返回"+result);
                                 JSONObject jsonObject=new JSONObject(result);
                                 resCode=jsonObject.getString("code");
                                 if(resCode.equals("200")){

@@ -233,7 +233,7 @@ public class LevelThree extends AppCompatActivity{
                 attackFlag = false;
             }
             if (count1 >= draw1.length) {
-                animatorSet[0].end();
+                animatorSet[0].pause();
                 player1.ifDied = true;
             }
             handler1.postDelayed(player1Runnable, 200);
@@ -396,7 +396,9 @@ public class LevelThree extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 player.setIns_text("",ins);
-                player.getInstructions(ins).clear();
+                if(player.getInstructions(ins)!=null){
+                    player.getInstructions(ins).clear();
+                }
                 popupWindow.dismiss();
                 initPopWindow(v,player);
             }

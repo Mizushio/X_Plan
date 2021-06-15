@@ -63,6 +63,9 @@ public class LevelTwo extends AppCompatActivity {
     private ImageView end=null;
     private ImageView role1 = null;
     private ImageView role2 = null;
+    private int barrierWidth = 200;
+    private int barrierHeight = 300;
+    private ImageView barrier = null;
 
     private boolean is_finish = false;
     final AnimatorSet[] animatorSet = new AnimatorSet[2];
@@ -92,6 +95,16 @@ public class LevelTwo extends AppCompatActivity {
                 countRole1=draw1.length - 1;
                 role1.setImageDrawable(getResources().getDrawable(draw1[countRole1]));
                 countRole1++;
+            }
+
+            int[] rolePos = new int[2];
+            int[] barrierPos = new int[2];
+            role1.getLocationOnScreen(rolePos);
+            barrier.getLocationOnScreen(barrierPos);
+            if(role1_run && Math.abs(barrierPos[0] - rolePos[0]) <= barrierWidth && Math.abs(barrierPos[1] - rolePos[1]) <= barrierHeight && is_finish==false){
+                role1.setImageDrawable(getResources().getDrawable(draw1[6]));
+                animatorSet[0].pause();
+                is_dead1 = true;
             }
 
             if(is_run == true && role1_run == false){
@@ -142,6 +155,15 @@ public class LevelTwo extends AppCompatActivity {
                 role1.setImageDrawable(getResources().getDrawable(draw2[countRole1]));
                 countRole2++;
             }
+            int[] rolePos = new int[2];
+            int[] barrierPos = new int[2];
+            role2.getLocationOnScreen(rolePos);
+            barrier.getLocationOnScreen(barrierPos);
+
+            if(Math.abs(barrierPos[0] - rolePos[0]) != 0 && Math.abs(barrierPos[0] - rolePos[0]) <= barrierWidth && Math.abs(barrierPos[1] - rolePos[1]) <= barrierHeight && is_finish==false){
+                role2.setImageDrawable(getResources().getDrawable(draw2[5]));
+                is_dead2 = true;
+            }
 
 
             if(is_run == true && role2_run == false){
@@ -177,7 +199,7 @@ public class LevelTwo extends AppCompatActivity {
 
 
 
-                mHandler.postDelayed(mRunnable_, 600);
+                mHandler_.postDelayed(mRunnable_, 600);
         }
     };
 
@@ -465,8 +487,9 @@ public class LevelTwo extends AppCompatActivity {
         start1 = findViewById(R.id.start1);
         start2 = findViewById(R.id.start2);
         run =  findViewById(R.id.run);
-        notGo = findViewById(R.id.notGo);
+        barrier = findViewById(R.id.barrier);
         back_ = findViewById(R.id.back_);
+        notGo = findViewById(R.id.notGo);
 
         final ImageView enemy = findViewById(R.id.enemy);
 
@@ -541,11 +564,19 @@ public class LevelTwo extends AppCompatActivity {
 
         // 通过Handler启动线程
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         mHandler.post(mRunnable);  //玩家1
         mHandler_.post(mRunnable_); //玩家2
         runHandler.post(runRunnable);
 
     }
+
+
 
     @Override
     protected void onDestroy() {

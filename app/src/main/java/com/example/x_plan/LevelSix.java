@@ -610,7 +610,9 @@ public class LevelSix extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 player.setIns_text("",ins);
-                player.getInstructions(ins).clear();
+                if(player.getInstructions(ins)!=null){
+                    player.getInstructions(ins).clear();
+                }
                 popupWindow.dismiss();
                 initPopWindow(v,player);
             }

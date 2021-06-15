@@ -70,7 +70,7 @@ public class MenuLayer extends CCLayer {
         this.username = username;
         init();
 
-        Thread.sleep(1000);
+        Thread.sleep(1500);
 
             //加载背景
             CCSprite bg=CCSprite.sprite("menu/menu_bg3.png");
