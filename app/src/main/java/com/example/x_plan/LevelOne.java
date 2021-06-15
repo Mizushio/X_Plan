@@ -9,8 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,13 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import org.cocos2d.layers.CCScene;
-//import org.cocos2d.nodes.CCDirector;
-//import org.cocos2d.opengl.CCGLSurfaceView;
 
 public class LevelOne extends AppCompatActivity {
     private String str = "";
@@ -35,13 +29,12 @@ public class LevelOne extends AppCompatActivity {
     private int judge = 0;    //记录哪一个路径是最新选择的
     private int count = 0;    //记录移动的次数
     private int isRun = 0;    //判断是否点击了run
-    private Button a;
-    private Button b;
-    private ImageView c;
+    private ImageView a;
+    private ImageView b;
+    private ImageView end;
     private AnimatorSet animatorSet = null;  //属性动画集合
     private Func f = new Func();
     private ImageView role1;
-    private ImageView barrier;
     private int hp = 6;
     private int barrierWidth = 200;
     private int barrierHeight = 200;
@@ -84,7 +77,7 @@ public class LevelOne extends AppCompatActivity {
                         views[i] = b;
                     }
                     else if(MoveChoose[i] == 3){
-                        views[i] = c;
+                        views[i] = end;
                     }
                     time[i] = 3000;
                 }
@@ -95,7 +88,7 @@ public class LevelOne extends AppCompatActivity {
                 int[] rolePos = new int[2];
                 int[] barrierPos = new int[2];
                 role1.getLocationOnScreen(rolePos);
-                c.getLocationOnScreen(barrierPos);
+                end.getLocationOnScreen(barrierPos);
                 if(Math.abs(barrierPos[0] - rolePos[0]) <= barrierWidth && Math.abs(barrierPos[1] - rolePos[1]) <= barrierHeight && hp >= 0){
 //                    hp = 0;
 //                    role1.setImageDrawable(getResources().getDrawable(rolePic[hp]));
@@ -105,7 +98,7 @@ public class LevelOne extends AppCompatActivity {
             if(hp == 0){
                 animatorSet.pause();
             }
-            if(isRun == 2 && f.victory(role1, c)){
+            if(isRun == 2 && f.victory(role1, end)){
                 isRun = 3;
                 initPopSuccess(role1);
             }
@@ -154,14 +147,13 @@ public class LevelOne extends AppCompatActivity {
         role1 = findViewById(R.id.role1);
         a = findViewById(R.id.A);
         b = findViewById(R.id.B);
-        c = findViewById(R.id.C);
-        barrier = c;
+        end = findViewById(R.id.end);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.level1);
         //初始化
         init();
         //启动玩家1的线程
@@ -187,21 +179,6 @@ public class LevelOne extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int[] rolePos = new int[2];
-                int[] enemyPos = new int[2];
-                role1.getLocationOnScreen(rolePos);
-                barrier.getLocationOnScreen(enemyPos);
-
-                Toast.makeText(LevelOne.this, "roleX:" + rolePos[0] + "\nRoleY:" + rolePos[1]
-                        + "\nbX:" + enemyPos[0] + "\nbY:" + enemyPos[1], Toast.LENGTH_SHORT).show();
-                Toast.makeText(LevelOne.this, "roleX:" + role1.getLeft() + "\nRoleY:" + role1.getBottom()
-                        + "\nbX:" + barrier.getLeft() + "\nbY:" + barrier.getBottom(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
     //玩家1点击的弹窗界面设置
     private void initPopWindow(View v){

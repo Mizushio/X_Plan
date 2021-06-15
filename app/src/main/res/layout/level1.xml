@@ -1,49 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/cat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/cat"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:src="@drawable/map1" />
 
-    <Button
+    <ImageView
         android:id="@+id/A"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="A"
-        tools:ignore="MissingConstraints" />
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="381dp"
+        android:layout_marginLeft="381dp"
+        android:layout_marginBottom="158dp"
+        android:src="@drawable/point1" />
 
-    <Button
+    <ImageView
         android:id="@+id/B"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="B"
-        tools:ignore="MissingConstraints"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="398dp"
+        android:layout_marginLeft="398dp"
+        android:layout_marginBottom="302dp"
+        android:src="@drawable/point2"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="61dp" />
 
     <ImageView
+        android:id="@+id/end"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="158dp"
+        android:layout_marginLeft="158dp"
+        android:layout_marginBottom="296dp"
+        android:src="@drawable/exit"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="61dp" />
+
+    <Button
+        android:id="@+id/run"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/cat"
-        tools:ignore="MissingConstraints"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="409dp"
+        android:layout_marginLeft="409dp"
+        android:layout_marginBottom="22dp"
+        android:text="启动"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="363dp" />
+        tools:layout_editor_absoluteY="61dp" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="523dp"
+        android:layout_marginLeft="523dp"
+        android:layout_marginBottom="22dp"
+        android:text="重新开始"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="61dp" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/cat"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="255dp"
-        tools:layout_editor_absoluteY="363dp" />
+        android:id="@+id/role1"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginBottom="158dp"
+        android:src="@drawable/hp6" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
