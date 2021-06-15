@@ -118,7 +118,7 @@ public class LevelThree extends AppCompatActivity{
                 player1.player.setEnabled(false);
                 player2.player.setEnabled(false);
                 cal();//解析命令数组
-                animatorSet[0] = f.Move_(player1.player,player1.views,200);
+                animatorSet[0] = f.Move_(player1.player,player1.views,100);
                 animatorSet[1] = f.Move_(player2.player, player2.views, 250);
                 handler2.post(player2Runnable);
                 handler1.post(player1Runnable);
