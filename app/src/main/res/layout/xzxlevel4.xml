@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/map_level4">
+    android:background="@drawable/map4">
 
     <ImageView
         android:id="@+id/A"
@@ -16,7 +16,7 @@
         android:layout_marginRight="363dp"
         android:layout_marginBottom="298dp"
         android:background="#00000000"
-        android:src="@drawable/spot1"
+        android:src="@drawable/biaozhi1"
         android:text="A" />
 
     <ImageView
@@ -29,7 +29,7 @@
         android:layout_marginEnd="110dp"
         android:layout_marginRight="110dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/spot2"
+        android:src="@drawable/biaozhi2"
         android:text="B"
         tools:layout_editor_absoluteX="0dp"
         android:background="#00000000"
@@ -51,6 +51,13 @@
         android:text="C"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="61dp" />
+    <ImageView
+        android:id="@+id/back_"
+        android:layout_width="47dp"
+        android:layout_height="54dp"
+
+        android:src="@drawable/back_white"
+        android:layout_marginTop="350dp"/>
 
     <ImageView
         android:id="@+id/role1"
@@ -62,7 +69,7 @@
         android:layout_marginEnd="633dp"
         android:layout_marginRight="633dp"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/hp5" />
+        android:src="@drawable/role1_hp6" />
 
     <Button
         android:id="@+id/reset"

@@ -93,7 +93,7 @@ public class SuccessActivity extends AppCompatActivity {
                         startActivity(activity_change1);//  开始跳转
                         break;
                     case 3:
-                        Intent activity_change2 = new Intent(SuccessActivity.this, LevelFive.class);    //切换 Activityanother至MainActivity
+                        Intent activity_change2 = new Intent(SuccessActivity.this, LevelFour.class);    //切换 Activityanother至MainActivity
                         Bundle bundle2 = new Bundle();// 创建Bundle对象
                         bundle2.putString("username",username);
                         activity_change2.putExtras(bundle2);

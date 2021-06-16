@@ -63,7 +63,7 @@ public class ErrorActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        Intent activity_change4= new Intent(ErrorActivity.this, LevelFive.class);    //切换 Activityanother至MainActivity
+                        Intent activity_change4= new Intent(ErrorActivity.this, LevelFour.class);    //切换 Activityanother至MainActivity
                         Bundle bundle4 = new Bundle();// 创建Bundle对象
                         bundle4.putString("username",username);
                         activity_change4.putExtras(bundle4);

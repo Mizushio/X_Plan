@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 
 import com.example.x_plan.LevelFive;
+import com.example.x_plan.LevelFour;
 import com.example.x_plan.LevelOne;
 import com.example.x_plan.LevelSix;
 import com.example.x_plan.LevelThree;
@@ -207,7 +208,7 @@ public class MenuLayer extends CCLayer {
         context.startActivity(intent);
     }
     public void onClick4(Object obj){
-        Intent intent = new Intent(context, LevelFive.class);
+        Intent intent = new Intent(context, LevelFour.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle bundle = new Bundle();// 创建Bundle对象
         bundle.putString("username",username );

@@ -61,6 +61,11 @@
                 <action android:name="android.intent.action.FIGHT3" />
             </intent-filter>
         </activity>
+        <activity android:name=".LevelFour"  android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.FIGHT3" />
+            </intent-filter>
+        </activity>
         <activity android:name=".LevelSix"  android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.LEVELSIX" />

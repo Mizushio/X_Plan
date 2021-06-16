@@ -47,7 +47,17 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.x_plan.layer.MenuLayer;
+
+import org.cocos2d.layers.CCScene;
+import org.cocos2d.nodes.CCDirector;
+import org.cocos2d.opengl.CCGLSurfaceView;
+
 public class LevelFour extends AppCompatActivity{
+
+    private String username;
+    private boolean is_finish = false;
+    private ImageView back_ = null;
 
     private int roleRun = 0;
     private int count = 0;
@@ -80,7 +90,7 @@ public class LevelFour extends AppCompatActivity{
     private boolean attack3=false;
     int[] enemypic = {R.drawable.deathhp0,R.drawable.deathhp1,R.drawable.deathhp2,R.drawable.deathhp3,R.drawable.deathhp4,R.drawable.deathhp5};
     int[] enemy1pic = {R.drawable.zombiehp0,R.drawable.zombiehp1,R.drawable.zombiehp2,R.drawable.zombiehp3,R.drawable.zombiehp4,R.drawable.zombiehp5};
-    int[] rolepic = {R.drawable.hp0,R.drawable.hp1,R.drawable.hp2,R.drawable.hp3,R.drawable.hp4,R.drawable.hp5};
+    int[] rolepic = {R.drawable.role1_hp0,R.drawable.role1_hp1,R.drawable.role1_hp2,R.drawable.role1_hp3,R.drawable.role1_hp4,R.drawable.role1_hp5};
 
 
     private Runnable mRunnable = new Runnable() {
@@ -111,8 +121,7 @@ public class LevelFour extends AppCompatActivity{
                 if(roleRun == 0){
                     roleRun = 1;
                     final View[] views = new View[]{a, b,c};
-                    final long[] time = new long[]{5000,5000,5000};
-                    animatorSet = f.Move(role1, views, time);
+                    animatorSet = f.Move(role1, views, 200);
                 }
 
 
@@ -120,8 +129,16 @@ public class LevelFour extends AppCompatActivity{
                 fEnemy[0] = enemy;
                 fEnemy1[0] = enemy1;
                 fc[0] = c;
-                if(f.FindEnemy(role1,fc,touch) != -1){
+                if(f.FindEnemy(role1,fc,touch) != -1 && is_finish==false){
                     //Toast.makeText(LevelFour.this,"胜利", Toast.LENGTH_SHORT).show();//胜利界面
+                    Intent activity_change= new Intent(LevelFour.this, SuccessActivity.class);    //切换 Activity
+                    Bundle bundle = new Bundle();// 创建Bundle对象
+                    bundle.putInt("data",4 );//  放入data值为int型
+                    bundle.putString("username",username);
+                    activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
+                    startActivity(activity_change);//  开始跳转
+                    is_finish = true;
+                    onDestroy();
                 }
 
                 if(attack1){
@@ -141,9 +158,15 @@ public class LevelFour extends AppCompatActivity{
                         rolehp -= 1;
                         role1.setImageDrawable(getResources().getDrawable(rolepic[rolehp]));
                     }
-                    if(rolehp==0){
+                    if(rolehp==0 && is_finish==false){
                         animatorSet.cancel();
-                        //失败界面
+                        Intent activity_change= new Intent(LevelFour.this, ErrorActivity.class);    //切换 Activity
+                        Bundle bundle = new Bundle();// 创建Bundle对象
+                        bundle.putString("username",username);
+                        bundle.putInt("data",4);
+                        activity_change.putExtras(bundle);// 将Bundle对象放入到Intent上
+                        startActivity(activity_change);//  开始跳转
+                        is_finish = true;
                     }
 
 
@@ -324,8 +347,12 @@ public class LevelFour extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xzxlevel4);
 
+        Intent intent = getIntent();
+        this.username = (String)intent.getExtras().get("username");
+
         //init();
         // 通过Handler启动线程
+
         mHandler.post(mRunnable);  //发送消息，启动线程运行
         //mHandler_.post(mRunnable_);
 
@@ -343,6 +370,9 @@ public class LevelFour extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LevelFour.this, LevelFour.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("username",username);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
