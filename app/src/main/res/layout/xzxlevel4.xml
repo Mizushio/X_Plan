@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/map_level4">
+
+    <ImageView
+        android:id="@+id/A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="363dp"
+        android:layout_marginRight="363dp"
+        android:layout_marginBottom="298dp"
+        android:background="#00000000"
+        android:src="@drawable/spot1"
+        android:text="A" />
+
+    <ImageView
+        android:id="@+id/B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="110dp"
+        android:layout_marginRight="110dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/spot2"
+        android:text="B"
+        tools:layout_editor_absoluteX="0dp"
+        android:background="#00000000"
+        tools:layout_editor_absoluteY="61dp" />
+
+
+    <ImageView
+        android:id="@+id/C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-9dp"
+        android:layout_marginRight="-9dp"
+        android:layout_marginBottom="211dp"
+        android:background="#00000000"
+        android:src="@drawable/exit"
+        android:text="C"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="61dp" />
+
+    <ImageView
+        android:id="@+id/role1"
+        android:layout_width="67dp"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="633dp"
+        android:layout_marginRight="633dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/hp5" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="330dp"
+        android:text="重置"
+        tools:ignore="MissingConstraints"
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="61dp" />
+
+    <Button
+        android:id="@+id/run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="630dp"
+        android:layout_marginRight="630dp"
+        android:layout_marginBottom="318dp"
+        android:text="启动"
+        tools:layout_editor_absoluteX="0dp"
+
+        tools:layout_editor_absoluteY="61dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/enemy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="371dp"
+        android:layout_marginRight="371dp"
+        android:layout_marginBottom="163dp"
+        android:background="#00000000"
+        android:src="@drawable/deathhp5" />
+
+    <ImageView
+        android:id="@+id/enemy1"
+        android:layout_width="42dp"
+        android:layout_height="107dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="179dp"
+        android:layout_marginRight="179dp"
+        android:layout_marginBottom="128dp"
+        android:background="#00000000"
+        android:src="@drawable/zombiehp5" />
+
+</RelativeLayout>
